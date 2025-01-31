@@ -1,0 +1,362 @@
+{
+    "header": {
+        "title": "Digital Twin Capabilities Periodic Table",
+        "version": "1.0",
+        "description": "This YAML file contains a comprehensive catalogue of capabilities for Digital Twin systems, organized into a 'periodic table' structure. It covers various aspects of Digital Twin technology, including data services, integration, intelligence, user experience, management, and trustworthiness.\n",
+        "usage": "This file can be used for reference, planning, and implementation of Digital Twin systems, as well as for educational and research purposes in the field of Digital Twin technology.\n",
+        "license": "CC BY-SA",
+        "license_attribution_entity": "Digital Twin Consortium",
+        "license_comments": "All derived content must include a CC BY-SA 4.0 license with reference to the license_attribution_entity. For more details, visit https://creativecommons.org/licenses/by-sa/4.0/.\n",
+        "maintainer": "Digital Twin Consortium - Composability Framework Sub Working Group",
+        "robots_instructions": "Follow the terms of the license when generating or deriving content."
+    },
+    "capabilities": {
+        "DS": {
+            "name": "Data Services",
+            "description": "Comprehensive data management and processing capabilities for digital twins, including acquisition, transformation, storage, and specialized data handling.",
+            "purpose": "Provide a robust foundation for data-driven digital twin operations, enabling efficient data flow, processing, and utilization across various systems and applications.",
+            "capabilities": {
+                "DS.AI": {
+                    "name": "Data Acquisition and Ingestion",
+                    "description": "Configure and acquire data from different data sources including control system, historians, IoT sensors, smart devices, engineering system, enterprise systems etc.",
+                    "purpose": "Acquire data from the physical world, engineering technology systems, and information technology systems to support subsequent processing and insight generation."
+                },
+                "DS.ST": {
+                    "name": "Data Streaming",
+                    "description": "Transfer large volumes of data continuously and incrementally between a source and a destination without accessing all data simultaneously.",
+                    "purpose": "Acquire fast continuous packets of information changing at high speed to enable near real-time insights."
+                },
+                "DS.TR": {
+                    "name": "Data Transformation and Wrangling",
+                    "description": "Convert data types and properties through cleaning, structuring and enriching raw data to make it suitable for further processing and analytics.",
+                    "purpose": "Make data useable in Digital Twins."
+                },
+                "DS.CX": {
+                    "name": "Data Contextualization",
+                    "description": "Add language or meta data to enrich real time or transactional data.",
+                    "purpose": "Combine data from different sources such as real-time and context to make it suitable for subsequent processing by the digital twin."
+                },
+                "DS.BP": {
+                    "name": "Batch Processing",
+                    "description": "Execute against previously collected data in bulk form.",
+                    "purpose": "Process high volumes of data efficiently in batches or groups."
+                },
+                "DS.RT": {
+                    "name": "Real-time processing",
+                    "description": "Manage and act on captured data with minimal latency.",
+                    "purpose": "Support immediate insights from the data."
+                },
+                "DS.AS": {
+                    "name": "Asynchronous Integration",
+                    "description": "Package filtered data to different services based on patterns like publish / subscribe model.",
+                    "purpose": "Provide information to subscribed digital twin consumers."
+                },
+                "DS.AG": {
+                    "name": "Data Aggregation",
+                    "description": "Gather raw data and express in a summary form.",
+                    "purpose": "Gather data from multiple sources and combine these data sources into a summary for data analysis."
+                },
+                "DS.SG": {
+                    "name": "Synthetic Data Generation",
+                    "description": "Generate synthetic data based on patterns and rules in existing sources.",
+                    "purpose": "Create representative synthetic data for training and scoring predictive models in the digital twin."
+                },
+                "DS.ON": {
+                    "name": "Ontology Management",
+                    "description": "Manage knowledge graphs and ontologies.",
+                    "purpose": "Enable digital twin interpretation of data directly from knowledge graphs and ontologies."
+                },
+                "DS.RP": {
+                    "name": "Digital Twin Model Repository",
+                    "description": "Store, manage and retrieve meta data that describe the digital twin model, including formal data names, comprehensive definitions, proper structures, and precise integrity rules.",
+                    "purpose": "Register and manage a portfolio of Digital Twin models in a central repository to improve configuration management and model governance."
+                },
+                "DS.IR": {
+                    "name": "Digital Twin Instance Repository",
+                    "description": "Store, manage and retrieve digital twin instance data that conforms to the requirements of the digital twin model.",
+                    "purpose": "Maintain and access Digital Twin instance state data."
+                },
+                "DS.DS": {
+                    "name": "Domain Specific Data Management",
+                    "description": "Handle, store, and retrieve data based on distinct characteristics inherent to specific data types.",
+                    "purpose": "Manage domain-specific data efficiently and effectively."
+                },
+                "DS.SA": {
+                    "name": "Data Storage and Archive Services",
+                    "description": "Store, organize and retrieve data based on access frequency and retention period.",
+                    "purpose": "Reduce cost and effort of managing Digital Twin data through hot, cold and archival data services."
+                },
+                "DS.SR": {
+                    "name": "Simulation Model Repository",
+                    "description": "Store, manage and retrieve algorithmic codebase, business rules and meta data that describe a simulation model.",
+                    "purpose": "Register and manage simulation models in a central repository to improve configuration management and model governance."
+                },
+                "DS.AR": {
+                    "name": "AI Model Repository",
+                    "description": "Store, manage, search and retrieve algorithmic codebase that describe artificial intelligence (AI) or machine learning (ML) models.",
+                    "purpose": "Register and manage AI and machine learning models in a central repository to improve configuration management and model governance."
+                }
+            }
+        },
+        "IR": {
+            "name": "Integration",
+            "description": "Capabilities for seamless integration between digital twins and various external systems, including enterprise, engineering, OT/IoT, and collaboration platforms.",
+            "purpose": "Enable smooth data flow and interoperability between digital twins and diverse systems, enhancing overall functionality and value.",
+            "capabilities": {
+                "IR.ET": {
+                    "name": "Enterprise system integration",
+                    "description": "Integrate the digital twin with existing enterprise systems such as ERP, EAM, CRM, CMMS.",
+                    "purpose": "Enable seamless data flow between Digital Twin systems and business applications."
+                },
+                "IR.EG": {
+                    "name": "Engineering systems integration",
+                    "description": "Integrate the digital twin with existing engineering systems such as CAD, CAM, BIM, Historians.",
+                    "purpose": "Enable model use and data flow between Digital Twin systems and engineering applications."
+                },
+                "IR.IO": {
+                    "name": "OT/IoT system integration",
+                    "description": "Integrate directly with control systems and IOT devices/sensors, SCADA.",
+                    "purpose": "Enable data flow between Digital Twin systems and operational technology (OT) and IoT applications."
+                },
+                "IR.DT": {
+                    "name": "Digital Twin Integration",
+                    "description": "Integrate or access information from existing digital twin instances.",
+                    "purpose": "Enable interoperability between Digital Twin applications."
+                },
+                "IR.CL": {
+                    "name": "Collaboration platform integration",
+                    "description": "Interface with platforms like Yammer, Jabber, Teams, Slack.",
+                    "purpose": "Provide Digital Twin users with a conversational user interface through integrated collaboration platforms."
+                },
+                "IR.AS": {
+                    "name": "API Services",
+                    "description": "Publish APIs to external, partner, and internal developers to access data and services.",
+                    "purpose": "Simplify Digital Twin development through product and service integration without implementation knowledge requirements."
+                }
+            }
+        },
+        "IC": {
+            "name": "Intelligence and Cognition",
+            "description": "Advanced analytical and decision-making capabilities for digital twins, including AI, machine learning, simulation, and predictive analytics.",
+            "purpose": "Process complex data, generate insights, and make intelligent decisions, enhancing value and applicability across various domains.",
+            "capabilities": {
+                "IC.SR": {
+                    "name": "Search",
+                    "description": "Query, locate, and retrieve relevant information or data from a larger dataset or collection.",
+                    "purpose": "Find and access specific information efficiently within large datasets."
+                },
+                "IC.IC": {
+                    "name": "Command and Control",
+                    "description": "Execute work instructions without human interaction, limited to IoT devices and non-plant controls.",
+                    "purpose": "Support future smart IoT devices with centralized management."
+                },
+                "IC.OS": {
+                    "name": "Orchestration",
+                    "description": "Coordinate automated configuration, management, and coordination of systems, applications, digital twins and services.",
+                    "purpose": "Manage complex tasks and workflows between different systems, applications, digital twins, or systems of digital twins."
+                },
+                "IC.AL": {
+                    "name": "Alerts and Notification",
+                    "description": "Display and manage alerts, messages, message queues, triggers, and notifications.",
+                    "purpose": "Trigger actions requiring intervention in ongoing processes."
+                },
+                "IC.RP": {
+                    "name": "Reporting",
+                    "description": "Generate configurable and customizable reports to get insights into the data.",
+                    "purpose": "Generate insights useful for various stakeholders and regulatory compliance."
+                },
+                "IC.AA": {
+                    "name": "Data Analysis and Analytics",
+                    "description": "Study and present data through charts, tables, dashboards, date filtering, and various criteria to create information and knowledge.",
+                    "purpose": "Understand past trends from historical data."
+                },
+                "IC.PR": {
+                    "name": "Prediction",
+                    "description": "Estimate specified future events or consequences of other events.",
+                    "purpose": "Use historical data, engineering, and analytical models to predict future events."
+                },
+                "IC.AI": {
+                    "name": "Artificial Intelligence",
+                    "description": "Perform actions and take decisions like humans, including machine learning, natural language processing, knowledge modeling, reasoning, inferencing, Generative AI, LLMs and Edge AI.",
+                    "purpose": "Enable human-like decision-making and actions in digital twin systems."
+                },
+                "IC.FL": {
+                    "name": "Federated Learning",
+                    "description": "Train algorithms across multiple decentralized digital twin edge devices or servers holding local data samples, without exchanging data.",
+                    "purpose": "Build common, robust machine learning models without sharing data, addressing privacy, security, and access rights issues."
+                },
+                "IC.SM": {
+                    "name": "Simulation",
+                    "description": "Create approximate imitation of processes or systems using historical information, physical models, video, audio, and animation.",
+                    "purpose": "Imitate physical system behavior and train operations and maintenance teams."
+                },
+                "IC.MA": {
+                    "name": "Mathematical Analytics",
+                    "description": "Perform mathematical and statistical calculations for physics-based and other mathematical models.",
+                    "purpose": "Enable physics models and mathematics calculations in Digital twin analytics."
+                },
+                "IC.PS": {
+                    "name": "Prescriptive Recommendations",
+                    "description": "Create recommendations based on business rules and AI logic for optimal next actions.",
+                    "purpose": "Provide guidance based on analytics, business rules and workflow to create actions and deliver business outcomes."
+                },
+                "IC.BR": {
+                    "name": "Business Rules",
+                    "description": "Create, manage and use business rules that influence digital twin behavior throughout its lifecycle.",
+                    "purpose": "Operate according to defined organizational policies, constraints, and decision logic while maintaining consistency."
+                },
+                "IC.DL": {
+                    "name": "Distributed Ledger and Smart Contracts",
+                    "description": "Use distributed ledgers for digital twin applications requiring immutable data and automation.",
+                    "purpose": "Enable automated, trustworthy interactions with smart contract systems and maintain immutable transaction records."
+                },
+                "IC.CS": {
+                    "name": "Composition",
+                    "description": "Use modular development approach to rapidly compose digital twin services for specific outcomes.",
+                    "purpose": "Create Digital twins from packaged, reusable business capabilities to reduce time to value and support citizen development."
+                }
+            }
+        },
+        "UX": {
+            "name": "User Experience",
+            "description": "Capabilities that enhance user interaction with digital twins, including various visualization techniques, real-time monitoring, and immersive technologies.",
+            "purpose": "Provide intuitive, engaging, and effective ways for users to interact with and derive value from digital twins across different scenarios.",
+            "capabilities": {
+                "UX.BV": {
+                    "name": "Basic Visualization",
+                    "description": "Display data through simple charts, graphs, dashboards, tables, hierarchical and basic 3D views of assets.",
+                    "purpose": "Help users understand data significance through visual context."
+                },
+                "UX.AV": {
+                    "name": "Advanced Visualization",
+                    "description": "Display complex charts, multi-system dashboards, 3D models, animations, and overlayed data visualizations.",
+                    "purpose": "Enable deep understanding of complex data through sophisticated visual representations."
+                },
+                "UX.RM": {
+                    "name": "Real-time Monitoring",
+                    "description": "Present and interact with continuously updated information streaming at zero or low latency.",
+                    "purpose": "Support real-time decision making with immediate data feedback."
+                },
+                "UX.ER": {
+                    "name": "Entity Relationship Visualization",
+                    "description": "Present Digital Twin entities and their hierarchical or graph-based relationships interactively.",
+                    "purpose": "Navigate and interact with complex entity hierarchies intuitively."
+                },
+                "UX.XR": {
+                    "name": "Extended Reality (XR)",
+                    "description": "Provide interactive experiences enhanced by computer-generated visual, auditory, and haptic information.",
+                    "purpose": "Create immersive and interactive simulations of physical environments."
+                },
+                "UX.DB": {
+                    "name": "Dashboards",
+                    "description": "Provide at-a-glance views of key performance indicators for specific objectives or processes.",
+                    "purpose": "Enable quick understanding of current or past system states across various roles."
+                },
+                "UX.CI": {
+                    "name": "Continuous Intelligence",
+                    "description": "Analyze data in flight (signals) to derive insights and actions in a business-focused interface.",
+                    "purpose": "Enable informed real-time decisions across operations, technology, and business roles."
+                },
+                "UX.BI": {
+                    "name": "Business Intelligence",
+                    "description": "Analyze stored data (records) to derive insights and actions in a business-focused interface.",
+                    "purpose": "Support data-driven decision making through historical analysis."
+                },
+                "UX.BP": {
+                    "name": "Business Process Management & Workflow",
+                    "description": "Execute sequenced actions as process flows for specific business outcomes.",
+                    "purpose": "Deliver repeatable, effective business outcomes through Digital Twin processes."
+                },
+                "UX.GE": {
+                    "name": "Gaming Engine Visualization",
+                    "description": "Create immersive virtual worlds and interactive experiences using gaming engine technology.",
+                    "purpose": "Enable Digital Twin interaction in a highly interactive metaverse environment."
+                },
+                "UX.3R": {
+                    "name": "3D rendering",
+                    "description": "Render 3D visualizations from point cloud data sets generated by LiDAR and other scanning technologies.",
+                    "purpose": "Interact with large point cloud and 3D datasets effectively."
+                },
+                "UX.GM": {
+                    "name": "Gamification",
+                    "description": "Implement game-playing elements in Digital Twin interaction.",
+                    "purpose": "Enhance user engagement through points, badges, and competition elements."
+                }
+            }
+        },
+        "MG": {
+            "name": "Management",
+            "description": "Capabilities for overseeing and controlling digital twin operations, including device management, monitoring, logging, and governance.",
+            "purpose": "Ensure efficient, secure, and compliant operation while maximizing reliability and effectiveness.",
+            "capabilities": {
+                "MG.DM": {
+                    "name": "Device Management",
+                    "description": "Provision, authenticate, configure, maintain, monitor and diagnose connected IoT devices.",
+                    "purpose": "Support all functional capabilities of devices and sensors in the Digital Twin environment."
+                },
+                "MG.SM": {
+                    "name": "System Monitoring",
+                    "description": "Observe Digital Twin systems by collecting, analyzing, and acting on health data.",
+                    "purpose": "Maximize system availability and performance through proactive maintenance."
+                },
+                "MG.EL": {
+                    "name": "Event Logging",
+                    "description": "Record events, transactions, and user access data to trace system activities.",
+                    "purpose": "Maintain audit trails for troubleshooting, compliance, and operational insights."
+                },
+                "MG.DG": {
+                    "name": "Data Governance",
+                    "description": "Manage data availability, usability, integrity and security based on internal standards and policies.",
+                    "purpose": "Ensure data consistency, trustworthiness, and appropriate usage."
+                }
+            }
+        },
+        "TW": {
+            "name": "Trustworthiness",
+            "description": "Capabilities ensuring reliability, security, and ethical operation of digital twins.",
+            "purpose": "Build and maintain trust through robust security, data privacy, and ethical standards.",
+            "capabilities": {
+                "TW.EX": {
+                    "name": "Data Encryption",
+                    "description": "Convert Digital Twin data between readable and encoded formats for secure transfer.",
+                    "purpose": "Protect sensitive data during storage and transmission."
+                },
+                "TW.DS": {
+                    "name": "Device Security",
+                    "description": "Enforce authenticated and authorized access to IoT device data through identity management and policies.",
+                    "purpose": "Control device data access through appropriate privileges and enforcement."
+                },
+                "TW.SC": {
+                    "name": "Security",
+                    "description": "Protect Digital Twins from unauthorized access, change or destruction.",
+                    "purpose": "Safeguard systems and data while maintaining integrity and confidentiality."
+                },
+                "TW.PR": {
+                    "name": "Privacy",
+                    "description": "Enable individual control over personal information collection, storage, and disclosure.",
+                    "purpose": "Protect privacy rights and ensure regulatory compliance with transparent data handling."
+                },
+                "TW.SF": {
+                    "name": "Safety",
+                    "description": "Operate digital twins without risking physical injury or health damage.",
+                    "purpose": "Prevent harmful actions and maintain safe operational boundaries."
+                },
+                "TW.RL": {
+                    "name": "Reliability",
+                    "description": "Perform required functions under stated conditions for specified time periods.",
+                    "purpose": "Deliver consistent, predictable outcomes throughout operational lifecycle."
+                },
+                "TW.RS": {
+                    "name": "Resilience",
+                    "description": "Maintain acceptable service levels during disruptions and recover lost capacity efficiently.",
+                    "purpose": "Sustain essential functions during adverse conditions with minimal operational impact."
+                },
+                "TW.RP": {
+                    "name": "Responsibility",
+                    "description": "Ensure ethical design and utilization that promotes transparency, prevents bias, and considers long-term impacts.",
+                    "purpose": "Operate within ethical guidelines while maintaining stakeholder trust and welfare."
+                }
+            }
+        }
+    }
+}
