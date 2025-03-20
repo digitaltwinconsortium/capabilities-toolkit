@@ -1,13 +1,13 @@
-# Digital Twin Consortium Capabilities ToolKit
+# Digital Twin Capabilities Periodic Table (CPT)
 
-The Digital Twin Capabilities Periodic Table (CPT) is an architecture and technology-agnostic requirements definition
+The Digital Twin Capabilities Periodic Table (CPT) is an architecture and technology agnostic requirements definition
 framework for digital engineering projects. It is aimed at organizations who want to design, develop, deploy and operate
 digital twins based on use case capability requirements versus the features of technology solutions.
 
 The CPT is a cornerstone of our work, reflecting digital engineering methodologies and leading practices, such as
 model-based systems engineering and advances in AI, and adapts over time as complexity increases. The ongoing iterations
 of CPT reflect our commitment to continuous improvement, driven by our community's valuable insights and active
-participation.
+participation. Version 1.1 delivers new capabilities and a refined structure. Work has begun on v2.0.
 
 The CPT framework facilitates collaboration for teams that need to create digital twin requirements specifications in
 large-scale, complex environments. The framework keeps the focus on the capability requirements of individual use cases.
@@ -31,7 +31,7 @@ This initiative:
 
 Public page on DTC website: https://www.digitaltwinconsortium.org/initiatives/capabilities-periodic-table/
 
-All the resources required to get stared with understanding and deploying the CPT are provided on this page.
+All of the resources required to get stared with understanding and deploying the CPT are provided on this page.
 
 ## This repository
 
