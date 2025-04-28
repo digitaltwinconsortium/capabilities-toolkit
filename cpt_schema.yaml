@@ -1,0 +1,21 @@
+# Main Schema
+header:
+  title: str()
+  version: str()
+  description: str()
+  usage: str()
+  maintainer: str()
+  license: str()
+  license_attribution_entity: str()
+  license_comments: str()
+  robots_instructions: str()
+
+capabilities: map(include('capability'))
+
+---
+# Reusable capability definition
+capability:
+  name: str()
+  description: str()
+  purpose: str()
+  capabilities: map(include('capability'), required=False)
