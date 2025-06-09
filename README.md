@@ -1,5 +1,7 @@
 # Digital Twin Consortium Capabilities ToolKit
 
+Public repository for DTC Digital Twin Capabilities Toolkit and AI Agent Capabilities Periodic Table.
+
 The Digital Twin Capabilities Periodic Table (CPT) is an architecture and technology-agnostic requirements definition
 framework for digital engineering projects. It is aimed at organizations who want to design, develop, deploy and operate
 digital twins based on use case capability requirements versus the features of technology solutions.
@@ -26,6 +28,21 @@ This initiative:
 - Accelerates digital twin adoption
 - Access all Digital Twin Capabilities Periodic Table elements, including the Digital Twin CPT, User Guide, Toolkit,
   Worksheet, and "What's New" documents.
+
+## Digital Twin Capabilities Periodic Table (DT CPT)
+- **Files**: See `digital-twin-cpt/` folder
+- **Description**: Architecture and technology-agnostic requirements definition framework for digital engineering projects
+- **Website**: https://www.digitaltwinconsortium.org/initiatives/capabilities-periodic-table/
+
+## AI Agent Capabilities Periodic Table (AI Agent CPT)
+- **Files**: See `ai-agent-cpt/` folder  
+- **Description**: Framework for evaluating AI agent systems based on actual capabilities
+- **Website**: https://www.digitaltwinconsortium.org/initiatives/ai-agent-capabilities-periodic-table/
+
+## License
+CC BY-SA - See LICENSE.txt
+
+[Keep rest of existing content]
 
 ## Public website - official release
 
