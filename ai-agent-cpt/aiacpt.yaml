@@ -1,0 +1,229 @@
+header:
+  title: AI Agents Capabilities Periodic Table
+  version: '1.0'
+  description: >
+    This YAML file contains a comprehensive catalogue of capabilities for AI Agent systems,
+    organized into a 'periodic table' structure. It covers various aspects of AI Agent technology,
+    including perception & knowledge, cognition & reasoning, learning & adaptation, action & execution,
+    interaction & collaboration, and governance & safety.
+  usage: >
+    This file can be used for reference, planning, and implementation of AI Agent systems,
+    as well as for educational and research purposes in the field of AI Agent technology.
+  license: CC BY-SA
+  license_attribution_entity: To Be Confirmed (XMPro or DTC)
+  license_comments: >
+    All derived content must include a CC BY-SA 4.0 license with reference to the license_attribution_entity.
+    For more details, visit https://creativecommons.org/licenses/by-sa/4.0/.
+  maintainer: To Be Confirmed (XMPro or DTC)
+  robots_instructions: Follow the terms of the license when generating or deriving content.
+capabilities:
+  PK:
+    name: Perception & Knowledge
+    description: Capabilities enabling agents to perceive inputs, access knowledge, and maintain contextual understanding across interactions.
+    purpose: Provide foundational sensory and cognitive capabilities for environmental awareness, knowledge access, and context management essential for intelligent agent operation.
+    capabilities:
+      PK.OB:
+        name: Environmental Sensing & Observation
+        description: Process multi-modal inputs including text, voice, image, and video with real-time event detection and pattern recognition capabilities.
+        purpose: Enable agents to perceive and understand their operational environment through comprehensive sensory input processing.
+      PK.KB:
+        name: Knowledge Base Access & Management
+        description: Access and manage diverse knowledge sources through semantic search, multi-database connectivity, and knowledge graph traversal.
+        purpose: Provide agents with comprehensive access to structured and unstructured knowledge for informed decision-making.
+      PK.CX:
+        name: Contextual Understanding & Memory
+        description: Maintain long-term episodic memory, cross-session context, and entity relationship mapping for coherent interactions.
+        purpose: Enable agents to understand context, maintain continuity, and build upon previous interactions and experiences.
+      PK.MF:
+        name: Multi-Modal Data Fusion
+        description: Integrate and correlate information across different modalities including audio, visual, and textual data streams.
+        purpose: Create unified understanding by combining insights from multiple data sources and sensory inputs.
+  CG:
+    name: Cognition & Reasoning
+    description: Core cognitive abilities enabling rational, goal-directed behavior through planning, reasoning, and strategic problem-solving.
+    purpose: Provide advanced thinking capabilities that enable agents to analyze complex situations, plan actions, and make intelligent decisions.
+    capabilities:
+      CG.PL:
+        name: Planning & Goal Decomposition
+        description: Break down complex objectives into manageable tasks with resource allocation, constraint satisfaction, and dynamic plan adaptation.
+        purpose: Enable systematic approach to achieving objectives through structured planning and adaptive execution strategies.
+      CG.RS:
+        name: Logical & Commonsense Reasoning
+        description: Apply deductive, inductive, and abductive reasoning with mathematical, symbolic, and causal relationship understanding.
+        purpose: Provide robust reasoning capabilities for logical analysis, inference, and understanding of cause-and-effect relationships.
+      CG.DC:
+        name: Decision Making & Control Flow
+        description: Perform multi-criteria decision analysis under uncertainty with dynamic control flow management and exception handling.
+        purpose: Enable intelligent decision-making in complex scenarios with appropriate control mechanisms and error recovery.
+      CG.PS:
+        name: Problem Solving & Strategy Formation
+        description: Analyze novel problems, generate creative solutions, and apply analogical reasoning for strategic thinking.
+        purpose: Provide advanced problem-solving capabilities for addressing complex challenges and developing strategic approaches.
+      CG.PP:
+        name: Formal Planning Integration
+        description: Integrate with formal planning systems using PDDL domain modeling, automated planning algorithms, and plan validation.
+        purpose: Enable sophisticated planning capabilities through integration with established planning methodologies and verification systems.
+      CG.PA:
+        name: Plan Adaptation & Versioning
+        description: Dynamically modify plans, manage versions with rollback capabilities, and analyze change impacts.
+        purpose: Provide flexible plan management with version control and impact analysis for robust plan evolution.
+  LA:
+    name: Learning & Adaptation
+    description: Capabilities for acquiring knowledge, improving performance, and adapting to changing conditions through various learning mechanisms.
+    purpose: Enable continuous improvement and adaptation through diverse learning approaches, memory management, and self-optimization capabilities.
+    capabilities:
+      LA.MM:
+        name: Memory Formation & Management
+        description: Manage working memory, long-term storage with importance scoring, and multiple memory types including episodic, semantic, and procedural.
+        purpose: Provide comprehensive memory capabilities for learning retention, experience accumulation, and knowledge organization.
+      LA.RL:
+        name: Reinforcement Learning & Feedback Integration
+        description: Implement trial-and-error exploration, human feedback integration, and multi-agent collaborative learning approaches.
+        purpose: Enable learning through experience, feedback, and interaction to improve performance and adapt behavior.
+      LA.AD:
+        name: Adaptation & Self-Optimization
+        description: Perform self-assessment, meta-learning, and dynamic adjustment of goals and priorities based on performance feedback.
+        purpose: Provide autonomous improvement capabilities through self-reflection, adaptation, and optimization of performance and objectives.
+      LA.SL:
+        name: Supervised Learning & Skill Acquisition
+        description: Execute few-shot and one-shot learning with skill transfer, generalization, and knowledge distillation capabilities.
+        purpose: Enable rapid skill acquisition and knowledge transfer for efficient learning and capability expansion.
+      LA.VM:
+        name: Vector Memory Management
+        description: Perform semantic similarity search, clustering, and optimization with multi-provider vector database support.
+        purpose: Provide efficient semantic memory storage and retrieval capabilities for knowledge-based reasoning and decision-making.
+      LA.MS:
+        name: Memory Significance Scoring
+        description: Assess importance, surprise, relevance, and trust factors for memory consolidation and retrieval prioritization.
+        purpose: Enable intelligent memory management through significance assessment and prioritized consolidation of experiences.
+  AE:
+    name: Action & Execution
+    description: Capabilities for translating decisions and plans into tangible outputs, tool usage, and environmental effects.
+    purpose: Transform cognitive processes into concrete actions through task execution, tool integration, content generation, and systematic implementation.
+    capabilities:
+      AE.TX:
+        name: Task Execution & Implementation
+        description: Follow instructions, execute procedures with quality control, validation, and progress tracking with error correction.
+        purpose: Provide reliable task completion capabilities with quality assurance and systematic progress monitoring.
+      AE.TL:
+        name: Tool Usage & API Integration
+        description: Dynamically select and chain tools, manage API authentication and secure access, and interpret tool outputs.
+        purpose: Enable flexible integration with external tools and services for expanded capability and functionality.
+      AE.CG:
+        name: Code Generation & Execution
+        description: Generate multi-language code with secure sandboxed execution environments and automated testing and optimization.
+        purpose: Provide programming capabilities for dynamic solution creation, automation, and system integration.
+      AE.CX:
+        name: Content Creation & Generation
+        description: Generate multi-format content including text, image, and audio with structured data conversion and creative writing.
+        purpose: Enable comprehensive content creation across multiple formats and styles for diverse communication and output needs.
+      AE.TM:
+        name: Tool Lifecycle Management
+        description: Discover, register, monitor, and manage tools dynamically with performance tracking and resource cleanup.
+        purpose: Provide systematic management of tool ecosystems for efficient resource utilization and capability orchestration.
+      AE.MC:
+        name: MCP Integration
+        description: Integrate with Model Context Protocol servers for extended capability access and standardized tool integration.
+        purpose: Enable standardized integration with external capabilities and context sources through established protocols.
+  IC:
+    name: Interaction & Collaboration
+    description: Capabilities for communication, coordination, system integration, and distributed collaboration across humans, agents, and systems.
+    purpose: Enable seamless interaction and collaboration between agents, humans, and systems through communication, coordination, and integration capabilities.
+    capabilities:
+      IC.NL:
+        name: Natural Language Interaction
+        description: Understand and generate multi-language communication with intent recognition, conversational context, and style adaptation.
+        purpose: Provide natural and effective communication capabilities for human-agent interaction across languages and contexts.
+      IC.DM:
+        name: Dialogue & Conversation Management
+        description: Track multi-turn conversation state, manage topics and disambiguation, and handle conversation repair and recovery.
+        purpose: Enable coherent and contextual conversations with effective dialogue management and error recovery capabilities.
+      IC.HL:
+        name: Human-in-the-Loop Integration
+        description: Implement human approval checkpoints, feedback incorporation workflows, and transparent decision boundaries.
+        purpose: Ensure appropriate human oversight and control in agent decision-making processes with clear escalation mechanisms.
+      IC.AC:
+        name: Agent-to-Agent Communication
+        description: Use standardized communication protocols, message formatting, coordination, and multi-agent synchronization.
+        purpose: Enable effective communication and coordination between multiple agents for collaborative task execution.
+      IC.CL:
+        name: Collaborative Task Execution
+        description: Distribute tasks based on roles, synchronize progress, share knowledge, and coordinate collaborative decision-making.
+        purpose: Provide systematic collaboration capabilities for multi-agent teams working toward common objectives.
+      IC.RB:
+        name: Role-Based Behavior & Specialization
+        description: Apply specialized domain knowledge, adapt behavior to role requirements, and switch between multiple role capabilities.
+        purpose: Enable specialized expertise and appropriate behavioral adaptation based on assigned roles and responsibilities.
+      IC.CS:
+        name: Consensus Protocol Management
+        description: Manage multi-round consensus with Byzantine fault tolerance, conflict detection, and distributed decision-making coordination.
+        purpose: Provide robust consensus mechanisms for reliable distributed decision-making in multi-agent environments.
+      IC.CF:
+        name: Conflict Detection & Resolution
+        description: Analyze resource contention, implement automated conflict resolution strategies, and manage escalation mechanisms.
+        purpose: Ensure smooth collaboration by detecting and resolving conflicts between agents and resource allocation.
+      IC.SI:
+        name: Industrial System Integration
+        description: Support MQTT, OPC-UA, Modbus protocols with SCADA/PLC connectivity and real-time industrial data processing.
+        purpose: Enable seamless integration with industrial control systems and operational technology environments.
+      IC.ES:
+        name: Enterprise System Integration
+        description: Integrate with multiple databases, enterprise APIs, and message brokers for comprehensive enterprise connectivity.
+        purpose: Provide broad enterprise system integration capabilities for complex organizational technology environments.
+      IC.MB:
+        name: Message Brokers & Event Streaming
+        description: Process high-throughput events with real-time stream analytics, correlation, and event-driven architecture implementation.
+        purpose: Enable scalable event processing and real-time data streaming for responsive and efficient system operation.
+      IC.DS:
+        name: Distributed Systems Coordination
+        description: Implement observability integration, distributed tracing, performance monitoring, and system-wide coordination.
+        purpose: Provide comprehensive coordination and monitoring capabilities for complex distributed agent systems.
+  GS:
+    name: Governance & Safety
+    description: Comprehensive capabilities ensuring safe, secure, ethical, and reliable agent operation with effective management and oversight.
+    purpose: Ensure responsible, secure, and reliable agent operation through comprehensive governance, safety measures, and operational oversight.
+    capabilities:
+      GS.DL:
+        name: Deployment & Lifecycle Management
+        description: Automate deployment and provisioning with version control, rollback capabilities, and configuration management.
+        purpose: Provide systematic deployment and lifecycle management for reliable agent system operations and maintenance.
+      GS.MO:
+        name: Monitoring & Observability
+        description: Collect real-time performance metrics, detect behavioral anomalies, and monitor system health with alerting.
+        purpose: Enable comprehensive system monitoring and observability for proactive maintenance and performance optimization.
+      GS.EV:
+        name: Evaluation & Performance Assessment
+        description: Conduct automated capability testing, benchmarking, quality assessment, and comparative analysis for vendor evaluation.
+        purpose: Provide objective assessment capabilities for measuring and comparing agent performance and capabilities.
+      GS.SC:
+        name: Scaling & Resource Management
+        description: Implement dynamic scaling based on demand with resource allocation optimization and load balancing.
+        purpose: Enable efficient resource utilization and system scaling to meet varying operational demands and cost optimization.
+      GS.SF:
+        name: Safety & Risk Management
+        description: Assess and mitigate risks, enforce safety constraints, and implement hazard detection with emergency response.
+        purpose: Ensure safe operation through comprehensive risk management and safety constraint enforcement mechanisms.
+      GS.SE:
+        name: Security & Access Control
+        description: Implement authentication, authorization, encryption, threat detection, and security audit compliance measures.
+        purpose: Provide robust security framework for protecting agent systems and data from unauthorized access and threats.
+      GS.EX:
+        name: Explainability & Transparency
+        description: Generate decision rationales, causal chain explanations, traceability, and confidence level reporting.
+        purpose: Enable understanding and trust through transparent decision-making processes and explainable agent behavior.
+      GS.RL:
+        name: Reliability & Robustness
+        description: Implement fault tolerance, graceful degradation, error detection and recovery, and performance consistency under load.
+        purpose: Ensure dependable operation through robust error handling and consistent performance across varying conditions.
+      GS.ET:
+        name: Ethics & Bias Mitigation
+        description: Detect and correct bias, implement ethical decision frameworks, and monitor fairness across demographics.
+        purpose: Ensure ethical operation through bias mitigation and fair treatment across diverse populations and scenarios.
+      GS.PR:
+        name: Privacy & Data Protection
+        description: Identify and protect personal data, implement privacy-preserving computation, and manage consent and data minimization.
+        purpose: Protect individual privacy rights through comprehensive data protection and privacy-preserving operational practices.
+      GS.TC:
+        name: Trust & Confidence Management
+        description: Assess trust through multiple factors, calculate and propagate confidence scores, and model trust relationships between agents.
+        purpose: Build and maintain trust through systematic confidence assessment and transparent trust relationship management.
