@@ -15,15 +15,10 @@ This prompt requires the **complete output** from the **AIA CPT Capability Mappi
 
 ---
 
-## Prompt Instructions
+## Prompt
 
+````prompt
 You are an expert web developer specializing in interactive data visualizations. Generate a complete, self-contained HTML file that creates a customized AI Agent Capabilities Periodic Table visualization based on the capability mapping provided.
-
-## Input: AIA CPT Capability Mapping Output
-
-[PASTE YOUR COMPLETE CAPABILITY MAPPING OUTPUT HERE]
-
----
 
 ## HTML Generation Requirements
 
@@ -42,7 +37,7 @@ You are an expert web developer specializing in interactive data visualizations.
 
 - **Title**: Use case name with relevant emoji
 - **Subtitle**: "[Industry] Implementation Guide - AI Agent Capabilities Periodic Table"
-- **Description**: Agent level, capability count, and brief value proposition
+- **Description**: Agent type, capability count, and brief value proposition
 - **Theme**: Background gradient and colors appropriate to the industry/domain
 
 ### Interactive Controls:
@@ -152,16 +147,16 @@ Use these exact CSS grid positions for each capability:
 **Title**: "🎯 The [Domain] Challenge" Generate 2-3 subsections explaining:
 
 - **Critical Decision Problem**: What specific business problem this solves
-- **Multi-Agent Conflicts** (if Level 4): Realistic conflict scenarios requiring consensus
-- **Complex Integration** (if Level 2+): Systems and data sources that must be integrated
+- **Multi-Agent Conflicts** (if Type 4): Realistic conflict scenarios requiring consensus
+- **Complex Integration** (if Type 2+): Systems and data sources that must be integrated
 
-#### 2. Architecture Rationale Section (if Level 2+):
+#### 2. Architecture Rationale Section (if Type 2+):
 
-**Title**: "🤖 Why Level [X] [Architecture Type]?" Generate subsections explaining:
+**Title**: "🤖 Why Type [X] [Architecture Type]?" Generate subsections explaining:
 
-- **Specialized Roles** (if Level 4): Individual agent responsibilities
+- **Specialized Roles** (if Type 4): Individual agent responsibilities
 - **Decision Timeframes**: Different time horizons for different decisions
-- **Coordination Requirements**: Why this level of sophistication is needed
+- **Coordination Requirements**: Why this type of sophistication is needed
 
 #### 3. Implementation Guidance Section:
 
@@ -234,12 +229,12 @@ Apply subtle, professional theming appropriate to the business domain:
 - **Scaling Requirements**: User counts, transaction volumes, system capacity
 - **Compliance Needs**: Industry regulations, security standards, audit requirements
 
-### Level-Appropriate Complexity:
+### Type-Appropriate Complexity:
 
-- **L1**: Focus on conversation design, knowledge access, basic safety
-- **L2**: Emphasize workflow coordination, tool integration, process management
-- **L3**: Highlight autonomous reasoning, learning, sophisticated decision-making
-- **L4**: Detail multi-agent coordination, consensus protocols, distributed intelligence
+- **T1**: Focus on conversation design, knowledge access, basic safety
+- **T2**: Emphasize workflow coordination, tool integration, process management
+- **T3**: Highlight autonomous reasoning, learning, sophisticated decision-making
+- **T4**: Detail multi-agent coordination, consensus protocols, distributed intelligence
 
 ---
 
@@ -268,3 +263,4 @@ Apply subtle, professional theming appropriate to the business domain:
 - **Appropriate Complexity**: Matches the sophistication level of the use case
 
 Generate a complete, professional HTML file that transforms the capability mapping into an engaging, interactive visualization that clearly communicates the value and implementation approach for this specific AI agent use case.
+````

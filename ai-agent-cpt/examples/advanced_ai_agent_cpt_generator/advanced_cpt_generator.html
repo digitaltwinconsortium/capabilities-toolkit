@@ -121,7 +121,7 @@
             box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
         }
 
-        .maturity-levels {
+        .maturity-types {
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -534,7 +534,7 @@
             <h1 class="main-title">DTC AI Agent Capabilities Periodic Table v1.0</h1>
             <p class="subtitle">Interactive Framework - Digital Twin Consortium</p>
             <div class="info-bar">
-                💡 Pro Tip: Click industry use cases or maturity levels to filter capabilities. Hover for detailed descriptions.
+                💡 Pro Tip: Click industry use cases or maturity types to filter capabilities. Hover for detailed descriptions.
             </div>
         </div>
 
@@ -553,18 +553,18 @@
             </div>
 
             <div class="control-panel">
-                <h3 class="control-title">Maturity Levels</h3>
-                <div class="maturity-levels">
-                    <button class="maturity-btn" data-level="L1">L1 - Conversational Agents</button>
-                    <button class="maturity-btn" data-level="L2">L2 - Procedural Workflow</button>
-                    <button class="maturity-btn" data-level="L3">L3 - Cognitive Autonomous</button>
-                    <button class="maturity-btn" data-level="L4">L4 - Multi-Agent Systems</button>
+                <h3 class="control-title">Maturity Types</h3>
+                <div class="maturity-types">
+                    <button class="maturity-btn" data-level="T1">T1 - Conversational Agents</button>
+                    <button class="maturity-btn" data-level="T2">T2 - Procedural Workflow</button>
+                    <button class="maturity-btn" data-level="T3">T3 - Cognitive Autonomous</button>
+                    <button class="maturity-btn" data-level="T4">T4 - Multi-Agent Systems</button>
                 </div>
                 <div class="progression-indicator">
-                    <div class="progress-dot" data-level="L1"></div>
-                    <div class="progress-dot" data-level="L2"></div>
-                    <div class="progress-dot" data-level="L3"></div>
-                    <div class="progress-dot" data-level="L4"></div>
+                    <div class="progress-dot" data-level="T1"></div>
+                    <div class="progress-dot" data-level="T2"></div>
+                    <div class="progress-dot" data-level="t3"></div>
+                    <div class="progress-dot" data-level="T4"></div>
                 </div>
             </div>
 
@@ -584,8 +584,8 @@
                         <div class="stat-label">Complexity %</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" id="maturity-level">All</div>
-                        <div class="stat-label">Maturity Level</div>
+                        <div class="stat-number" id="maturity-types">All</div>
+                        <div class="stat-label">Maturity type</div>
                     </div>
                 </div>
             </div>
@@ -703,11 +703,11 @@
         };
 
         // Maturity level definitions
-        const maturityLevels = {
-            L1: ['IC.NL', 'IC.DM', 'PK.KB', 'PK.CX', 'AE.CX', 'GS.SE', 'GS.PR'],
-            L2: ['CG.PL', 'AE.TX', 'AE.TL', 'IC.AC', 'IC.CL', 'IC.RB', 'GS.MO', 'IC.ES'],
-            L3: ['CG.RS', 'CG.PS', 'CG.DC', 'LA.MM', 'LA.AD', 'PK.OB', 'AE.CG', 'GS.EX', 'LA.SL', 'LA.VM'],
-            L4: ['IC.CS', 'IC.CF', 'IC.DS', 'IC.SI', 'IC.MB', 'GS.TC', 'GS.RL', 'CG.PP', 'CG.PA', 'LA.MS']
+        const maturityTypes = {
+            T1: ['IC.NL', 'IC.DM', 'PK.KB', 'PK.CX', 'AE.CX', 'GS.SE', 'GS.PR'],
+            T2: ['CG.PL', 'AE.TX', 'AE.TL', 'IC.AC', 'IC.CL', 'IC.RB', 'GS.MO', 'IC.ES'],
+            T3: ['CG.RS', 'CG.PS', 'CG.DC', 'LA.MM', 'LA.AD', 'PK.OB', 'AE.CG', 'GS.EX', 'LA.SL', 'LA.VM'],
+            T4: ['IC.CS', 'IC.CF', 'IC.DS', 'IC.SI', 'IC.MB', 'GS.TC', 'GS.RL', 'CG.PP', 'CG.PA', 'LA.MS']
         };
 
         let currentFilter = { type: 'industry', value: 'all' };
@@ -783,7 +783,7 @@
             if (currentFilter.type === 'industry') {
                 activeCapabilities = industryUseCases[currentFilter.value] || [];
             } else if (currentFilter.type === 'maturity') {
-                activeCapabilities = maturityLevels[currentFilter.value] || [];
+                activeCapabilities = maturityTypes[currentFilter.value] || [];
             }
 
             allCapabilities.forEach(cap => {
@@ -830,7 +830,7 @@
                     categoriesUsed.add(capId.split('.')[0]);
                 });
             } else if (currentFilter.type === 'maturity') {
-                const activeCaps = maturityLevels[currentFilter.value] || [];
+                const activeCaps = maturityTypes[currentFilter.value] || [];
                 activeCount = activeCaps.length;
                 activeCaps.forEach(capId => {
                     categoriesUsed.add(capId.split('.')[0]);
@@ -845,9 +845,9 @@
             document.getElementById('complexity-percent').textContent = `${complexityPercent}%`;
             
             if (currentFilter.type === 'maturity') {
-                document.getElementById('maturity-level').textContent = currentFilter.value;
+                document.getElementById('maturity-types').textContent = currentFilter.value;
             } else {
-                document.getElementById('maturity-level').textContent = 'All';
+                document.getElementById('maturity-types').textContent = 'All';
             }
         }
 

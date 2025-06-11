@@ -6,14 +6,10 @@ This folder contains prompt engineering resources and sequence templates for the
 
 ### AIA Sequence Prompts (`aia_sequence_prompts/`)
 Specialized prompts for AI Agent CPT workflow and capability analysis:
-- **`aia_cpt_capability_mapping_prompt.md`** - Structured prompts for mapping business requirements to AI agent capabilities
-- **`team_design_generation_prompt.md`** - Templates for designing AI agent teams and multi-agent systems
-
-### Digital Twin Sequence Prompts (`digitaltwin_sequence_prompts/`)
-Integration prompts for combining Digital Twin CPT with AI Agent CPT:
-- **`capability_deep_dives.md`** - Deep analysis prompts for capability exploration
-- **`digitaltwin_capability_selector.md`** - Prompts for selecting appropriate digital twin capabilities
-- **`digitaltwin_business_requirements_generator.md`** - Business requirements generation for integrated DT+AI systems
+- **`step_0_use_case_suitability.md`** - Initial assessment prompt for evaluating whether a specific business scenario or problem is suitable for AI agent implementation. This prompt guides users through analyzing factors like task complexity, data availability, automation potential, and ROI considerations to determine if AI agents are the right solution before proceeding with detailed capability mapping.
+- **`step_1_digital_twin_business_requirements_generator.md`** - Structured prompt template for extracting and defining comprehensive business requirements when implementing digital twin technologies with AI agents. This generator helps identify key business objectives, operational constraints, data requirements, integration needs, and success metrics that will inform the subsequent team design and capability mapping phases.
+- **`step_2_team_design_generation_prompt.md`** - Templates for designing AI agent teams and multi-agent systems
+- **`step_3_aia_cpt_capability_mapping_prompt.md`** - Structured prompts for mapping business requirements to AI agent capabilities
 
 ## Usage Guidelines
 
@@ -21,11 +17,6 @@ Integration prompts for combining Digital Twin CPT with AI Agent CPT:
 1. Start with capability mapping prompts to understand your requirements
 2. Use team design prompts to structure multi-agent approaches
 3. Apply deep dive prompts for detailed capability analysis
-
-### For Integrated DT+AI Systems
-1. Begin with business requirements generation for combined systems
-2. Use capability selector prompts to identify needed DT capabilities
-3. Apply integration prompts to design cohesive DT+AI solutions
 
 ### Prompt Engineering Best Practices
 - Customize prompts based on your specific industry and use case

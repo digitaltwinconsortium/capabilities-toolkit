@@ -1,4 +1,3 @@
-```
 ## Instructions
 
 Please provide a comprehensive business requirements specification for a digital twin solution based on the problem statement below. Structure your response to include all relevant contextual information that would help identify required capabilities from the Digital Twin Capabilities Periodic Table.
@@ -72,5 +71,3 @@ Please provide a comprehensive business requirements specification for a digital
 Your specification should be detailed enough to serve as a foundation for identifying the specific capabilities needed from the Digital Twin Capabilities Periodic Table in a subsequent analysis.
 
 Please use Claude artifacts.
-```
-

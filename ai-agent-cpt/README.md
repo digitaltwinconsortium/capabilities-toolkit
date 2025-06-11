@@ -43,13 +43,13 @@ The AIA CPT enables the progression to the autonomous intelligence layer - the p
 ## Strategic Value of the Combined Framework
 This convergence enables "Intelligent Digital Twins" or "Agentic Digital Systems" - where digital twins actively reason, predict, and take autonomous actions. The complementary periodic tables help organizations identify which AI capabilities are needed for their specific digital twin use cases, from simple automation to complex multi-agent coordination.
 
-The AIA CPT framework defines four maturity levels, from basic conversational agents to sophisticated Multi-Agent Generative Systems (MAGS):
+The AIA CPT framework defines four maturity types, from basic conversational agents to sophisticated Multi-Agent Generative Systems (MAGS):
 
-Level 1: Conversational Agents
-Level 2: Procedural Workflow Agents
-Level 3: Cognitive Autonomous Agents
-Level 4: MAGS
-The AIA CPT draws insights into AI agent systems from across multiple industries and maturity levels, enabling cross-industry AI agent evaluation.
+Type 1: Conversational Agents
+Type 2: Procedural Workflow Agents
+Type 3: Cognitive Autonomous Agents
+Type 4: MAGS
+The AIA CPT draws insights into AI agent systems from across multiple industries and maturity types, enabling cross-industry AI agent evaluation.
 
 Together with the DT CPT, organizations can now, in a standardized manner:
 
@@ -62,27 +62,27 @@ Combined with the DT CPT and the newly announced AIA CPT, these complementary fr
 ## AIA CPT - AI Agent Maturity
 This structure enables organizations to systematically assess, plan, and implement AI Agent capabilities that effectively leverage their Digital Twin investments while maintaining architectural clarity and technical rigor.
 
-### Level 0: Static Automation
+### Type 0: Static Automation
 
 Pre-programmed responses with no learning or adaptation
 Traditional rule-based Symbolic AI systems and basic automation
 
-### Level 1: Conversational Agents
+### Type 1: Conversational Agents
 
 Natural language interaction with basic context management
 Customer service chatbots, FAQ systems, voice assistants
 
-### Level 2: Procedural Workflow Agents
+### Type 2: Procedural Workflow Agents
 
 Multi-step task execution with tool integration and role-based collaboration
 Workflow automation, task orchestration, process management
 
-### Level 3: Cognitive Autonomous Agents
+### Type 3: Cognitive Autonomous Agents
 
 Self-directed planning, learning from experience, sophisticated reasoning
 Research assistance, predictive systems, autonomous decision-making
 
-### Level 4: Multi-Agent Generative Systems (MAGS)
+### Type 4: Multi-Agent Generative Systems (MAGS)
 
 Collaborative intelligence with emergent behaviours and distributed coordination
 Industrial automation, smart city systems, complex orchestration
@@ -93,17 +93,11 @@ The complimentary frameworks are particularly valuable for organizations develop
 ### Core Definition Files
 - **`ai_agent_cpt.yaml`** - Complete capabilities definition with all six categories and detailed subcategories
 - **`ai_agent_cpt_schema.yaml`** - Schema validation file for the framework structure
-- **`aia_cpt_user_guide.md`** - Comprehensive user guide in Markdown format
 
 ### Documentation Suite
-- **`user_guide.pdf`** - Complete user guide (PDF format)
-- **`user_guide.docx`** - User guide in Word format for editing and customization
-- **`worksheet.pdf`** - Assessment worksheet for capability evaluation (PDF format)
-- **`worksheet.xlsx`** - Interactive assessment worksheet (Excel format)
-
-### Integration Resources
-- **`framework_integration.pdf`** - Integration guide combining Digital Twin CPT and AI Agent CPT
-- **`framework_integration.pptx`** - Framework comparison and integration presentation
+- **`aia_cpt_v1_user_guide.pdf`** - Complete user guide (PDF format)
+- **`aia_cpt_v1_toolkit.pdf`** - Assessment worksheet for capability evaluation (PDF format)
+- **`aia_cpt_v1_toolkit.xlsx`** - Interactive assessment worksheet (Excel format)
 
 ### Implementation Tools
 - **`prompts/`** - Prompt engineering resources and sequence templates for systematic capability assessment
@@ -116,11 +110,10 @@ The complimentary frameworks are particularly valuable for organizations develop
 
 ## Getting Started
 
-1. **Read the User Guide** - Start with `user_guide.pdf` or `aia_cpt_user_guide.md` for comprehensive framework understanding
-2. **Use the Assessment Worksheet** - Evaluate your current capabilities with `worksheet.xlsx`
+1. **Read the User Guide** - Start with `aia_cpt_v1_user_guide.pdf` for comprehensive framework understanding
+2. **Use the Assessment Worksheet** - Evaluate your current capabilities with `aia_cpt_v1_toolkit.xlsx`
 3. **Explore Prompt Resources** - Check `prompts/` for structured assessment sequences
 4. **Try Interactive Tools** - Use `examples/` for hands-on capability exploration
-5. **Review Integration Guide** - See `framework_integration.pdf` for combining with Digital Twin CPT
 
 ## Usage
 

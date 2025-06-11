@@ -1,4 +1,5 @@
 # AI Agent Capabilities Periodic Table Schema
+# ai_agent_cpt_schema.yaml
 header:
   title: str()
   version: str()
@@ -9,7 +10,7 @@ header:
   license_attribution_entity: str()
   license_comments: str()
   robots_instructions: str()
-  maturity_levels: map(str(), str())
+  category_types: map(str(), str())
   category_structure: str()
 
 capabilities: map(include('category'))

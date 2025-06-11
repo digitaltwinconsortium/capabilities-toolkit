@@ -7,9 +7,7 @@
 Download and include the following AIA CPT framework files from the **Digital Twin Consortium GitHub repository**:
 
 - **`ai_agent_cpt.yaml`** - Complete 45-capability framework definitions
-- **`aia_cpt_user_guide.md`** - Comprehensive implementation guidance
-- **`aia_cpt_examples_complete.md`** - Real-world examples across all maturity levels (L1-L4)
-- **Supporting files**: HTML visualizations, Excel templates, and generator prompts
+- **Supporting files**: HTML visualizations, Excel templates, User Guide, and generator prompts
 
 ### Why These Files Are Important:
 
@@ -22,60 +20,60 @@ Download and include the following AIA CPT framework files from the **Digital Tw
 
 Visit the **Digital Twin Consortium GitHub page** and locate the AIA CPT project repository for the latest versions of all framework files.
 
+---
+
+## Prompt
+
 ```
 # Adaptive AI Agent Design Prompt
 
-You are an expert in AI agent system design across all maturity levels. Based on the business requirements provided, first determine the appropriate agent level, then design a complete solution for that specific level.
+You are an expert in AI agent system design across all maturity types. Based on the business requirements provided, first determine the appropriate agent type, then design a complete solution for that specific type.
 
-Please Use Claude artifacts
-
-## Input: Business Requirements
-
-[PASTE YOUR BUSINESS REQUIREMENTS OUTPUT HERE]
+Please Use Claude artifacts.
 
 ---
 
-## PHASE 1: AGENT LEVEL ASSESSMENT
+## PHASE 1: AGENT TYPE ASSESSMENT
 
-Based on the business requirements provided, analyze and determine the appropriate agent level:
+Based on the business requirements provided, analyze and determine the appropriate agent type:
 
-### Agent Level Criteria:
+### Agent Type Criteria:
 
-**Level 0: Static Automation**
+**Type 0: Static Automation**
 
 - Pre-programmed responses with no learning or adaptation
 - Simple rule-based decisions with deterministic outcomes
 - _Use when: Simple, predictable tasks with clear if-then logic_
 
-**Level 1: Conversational Agents**
+**Type 1: Conversational Agents**
 
 - Natural language interaction with basic context management
 - Information retrieval and guided assistance
 - _Use when: Customer support, FAQ systems, information access_
 
-**Level 2: Procedural Workflow Agents**
+**Type 2: Procedural Workflow Agents**
 
 - Multi-step task execution with tool integration
 - Process orchestration and workflow management
 - _Use when: Business process automation, task coordination_
 
-**Level 3: Cognitive Autonomous Agents**
+**Type 3: Cognitive Autonomous Agents**
 
 - Self-directed planning with sophisticated reasoning
 - Learning from experience and autonomous adaptation
 - _Use when: Complex decision-making, predictive analytics, autonomous operations_
 
-**Level 4: Multi-Agent Generative Systems (MAGS)**
+**Type 4: Multi-Agent Generative Systems (MAGS)**
 
 - Collaborative intelligence with emergent behaviors
 - Distributed coordination across multiple specialized agents
 - _Use when: Complex systems requiring multiple specialized capabilities, industrial automation_
 
-### Level Assessment:
+### Type Assessment:
 
-**Recommended Level**: [L0/L1/L2/L3/L4]
+**Recommended Level**: [T0/T1/T2/T3/T4]
 
-**Justification**: [2-3 sentences explaining why this level is appropriate based on:
+**Justification**: [2-3 sentences explaining why this type is appropriate based on:
 
 - Complexity of decisions required
 - Need for learning/adaptation
@@ -92,15 +90,15 @@ Based on the business requirements provided, analyze and determine the appropria
 
 ---
 
-## PHASE 2: CONFIRM LEVEL SELECTION
+## PHASE 2: CONFIRM TYPE SELECTION
 
-**PAUSE FOR USER CONFIRMATION**: Is Level [X] appropriate for your use case? If not, specify the preferred level and I will adapt the design accordingly.
+**PAUSE FOR USER CONFIRMATION**: Is Type [X] appropriate for your use case? If not, specify the preferred type and I will adapt the design accordingly.
 
 ---
 
-## PHASE 3: LEVEL-SPECIFIC DESIGN OUTPUT
+## PHASE 3: TYPE-SPECIFIC DESIGN OUTPUT
 
-### FOR LEVEL 0: STATIC AUTOMATION DESIGN
+### FOR TYPE 0: STATIC AUTOMATION DESIGN
 
 **System Name**: [Descriptive name for the automation system] **Purpose**: [What specific problem this automation solves]
 
@@ -121,7 +119,7 @@ Based on the business requirements provided, analyze and determine the appropria
 
 ---
 
-### FOR LEVEL 1: CONVERSATIONAL AGENT DESIGN
+### FOR TYPE 1: CONVERSATIONAL AGENT DESIGN
 
 **Agent Name**: [Meaningful name reflecting purpose] **Persona**: [Personality and communication style] **Primary Purpose**: [Main function the agent serves]
 
@@ -149,7 +147,7 @@ Based on the business requirements provided, analyze and determine the appropria
 
 ---
 
-### FOR LEVEL 2: PROCEDURAL WORKFLOW AGENT DESIGN
+### FOR TYPE 2: PROCEDURAL WORKFLOW AGENT DESIGN
 
 **System Name**: [Descriptive name for the workflow system] **Scope**: [What processes/workflows this system manages]
 
@@ -183,7 +181,7 @@ Based on the business requirements provided, analyze and determine the appropria
 
 ---
 
-### FOR LEVEL 3: COGNITIVE AUTONOMOUS AGENT DESIGN
+### FOR TYPE 3: COGNITIVE AUTONOMOUS AGENT DESIGN
 
 **Agent Name**: [Meaningful name reflecting cognitive capabilities] **Domain Expertise**: [Area of specialized knowledge] **Autonomy Level**: [Degree of independent operation allowed]
 
@@ -219,7 +217,7 @@ Based on the business requirements provided, analyze and determine the appropria
 
 ---
 
-### FOR LEVEL 4: MULTI-AGENT GENERATIVE SYSTEMS (MAGS) DESIGN
+### FOR TYPE 4: MULTI-AGENT GENERATIVE SYSTEMS (MAGS) DESIGN
 
 **Team Name**: [Meaningful name reflecting function and purpose] **Executive Summary**: [2-3 sentences describing team's approach] **Primary Objective**: [Single statement defining what the team optimizes for] **Value Proposition**: [How this team adds business value] **Operating Principles**: [3-5 core principles guiding team behavior]
 
@@ -342,7 +340,7 @@ Based on the MAGS team design, identify the required AI Agent Capabilities Perio
 
 ## Design Requirements:
 
-- Ensure the solution matches the complexity level required by the business requirements
+- Ensure the solution matches the complexity type required by the business requirements
 - Address all stakeholders mentioned in the business requirements
 - Optimize for the key metrics identified in the business requirements
 - Consider all data sources and constraints specified

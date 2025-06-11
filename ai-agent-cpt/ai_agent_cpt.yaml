@@ -1,12 +1,13 @@
+# Complete AI Agent CPT YAML File
+# ai_agent_cpt.yaml
 header:
   title: AI Agent Capabilities Periodic Table
-  version: '3.1'
+  version: '1.0'
   description: >
     This YAML file contains a comprehensive catalogue of capabilities for AI Agent systems,
     organized into a streamlined 6-category 'periodic table' structure. It covers all aspects 
     of AI Agent technology including perception, cognition, learning, action, interaction, and 
-    governance. Version 3.1 incorporates enhanced industrial and enterprise capabilities 
-    identified through analysis of production MAGS systems like XMPro, addressing critical gaps 
+    governance. Version 1.0 incorporates enhanced industrial and enterprise capabilities addressing critical gaps 
     in consensus management, system integration, and distributed coordination.
   usage: >
     This file can be used for reference, planning, and implementation of AI Agent systems,
@@ -14,18 +15,19 @@ header:
     as well as for educational and research purposes in AI Agent technology and Multi-Agent 
     Generative Systems (MAGS).
   license: CC BY-SA
-  license_attribution_entity: AI Agent CPT Working Group
+  license_attribution_entity: Digital Twin Consortium
   license_comments: >
     All derived content must include a CC BY-SA 4.0 license with reference to the license_attribution_entity.
     For more details, visit https://creativecommons.org/licenses/by-sa/4.0/.
-  maintainer: AI Agent CPT Working Group - Anti-Agent Washing Initiative
+  maintainer: Digital Twin Consortium - Composability Framework Sub Working Group
   robots_instructions: Follow the terms of the license when generating or deriving content.
-  maturity_levels:
-    L0: Static Automation (not truly agentic)
-    L1: Conversational Agents
-    L2: Procedural Workflow Agents  
-    L3: Cognitive Autonomous Agents
-    L4: Multi-Agent Generative Systems (MAGS)
+
+  category_types:
+    T0: Static Automation (not truly agentic)
+    T1: Conversational Agents
+    T2: Procedural Workflow Agents  
+    T3: Cognitive Autonomous Agents
+    T4: Multi-Agent Generative Systems (MAGS)
   category_structure: Streamlined 6-category framework for comprehensive capability coverage
 
 capabilities:
@@ -34,7 +36,7 @@ capabilities:
     description: Capabilities enabling agents to perceive inputs, access knowledge, and maintain contextual understanding across interactions with sophisticated memory management.
     purpose: Provide comprehensive environmental awareness, knowledge access, and contextual memory for informed agent behavior.
     capabilities:
-      PK.OB-001:
+      PK.OB:
         name: Environmental Sensing & Observation
         description: The ability to receive and interpret input from the agent's operational environment across multiple modalities.
         purpose: Enable contextually aware responses, environmental state awareness, and timely reaction to changes.
@@ -48,9 +50,9 @@ capabilities:
           - Supported modalities (text/voice/image/video)
           - Input processing latency (ms)
           - Pattern detection precision/recall
-        archetypes: All Levels (L1-L4)
+        archetypes: All Types (T1-T4)
         
-      PK.KB-002:
+      PK.KB:
         name: Knowledge Base Access & Management
         description: The ability to connect to, retrieve from, and update internal/external knowledge sources with semantic understanding.
         purpose: Enable informed decision-making beyond pre-trained knowledge, factual accuracy, and domain expertise.
@@ -64,9 +66,9 @@ capabilities:
           - Retrieval relevance score (0-1)
           - Knowledge source diversity (count)
           - Update/write capability (Y/N)
-        archetypes: All Levels
+        archetypes: All Types
         
-      PK.CX-003:
+      PK.CX:
         name: Contextual Understanding & Memory
         description: The ability to comprehend and maintain relevant context across interactions and time with sophisticated memory management.
         purpose: Enable coherent long-term interactions, personalized responses, and learning from experience.
@@ -80,9 +82,9 @@ capabilities:
           - Long-term memory retention (days/weeks)
           - Context relevance accuracy (%)
           - Cross-session continuity score
-        archetypes: L2+ (Critical for workflow and cognitive)
+        archetypes: T2+ (Critical for workflow and cognitive)
         
-      PK.MF-004:
+      PK.MF:
         name: Multi-Modal Data Fusion
         description: The ability to integrate and reason over information from multiple modalities with cross-modal understanding.
         purpose: Enable richer understanding of complex situations, enhanced situational awareness, and nuanced insights.
@@ -103,7 +105,7 @@ capabilities:
     description: Core cognitive abilities enabling rational, goal-directed behavior through planning, reasoning, strategic problem-solving, and formal planning integration.
     purpose: Provide systematic thinking, decision-making, problem-solving, and advanced planning capabilities for complex agent behaviors.
     capabilities:
-      CG.PL-001:
+      CG.PL:
         name: Planning & Goal Decomposition
         description: The ability to break down complex goals into executable plans and sub-tasks with strategic foresight.
         purpose: Enable systematic approach to complex problems, efficient resource utilization, and structured execution.
@@ -117,9 +119,9 @@ capabilities:
           - Task completion rate (%)
           - Plan adaptation frequency
           - Sub-goal feasibility assessment
-        archetypes: L2+ (Procedural workflow and above)
+        archetypes: T2+ (Procedural workflow and above)
         
-      CG.RS-002:
+      CG.RS:
         name: Logical & Commonsense Reasoning
         description: The ability to apply logical inference and commonsense knowledge to draw sound conclusions.
         purpose: Enable sound judgments, accurate inferences, and human-like understanding.
@@ -133,9 +135,9 @@ capabilities:
           - Mathematical problem accuracy (%)
           - Commonsense reasoning test performance
           - Consistency across reasoning types
-        archetypes: L2+ (Enhanced for L3 cognitive)
+        archetypes: T2+ (Enhanced for T3 cognitive)
         
-      CG.DC-003:
+      CG.DC:
         name: Decision Making & Control Flow
         description: The ability to make autonomous decisions and control execution flow under uncertainty.
         purpose: Enable autonomous operation, robust execution, and adaptive behavior.
@@ -149,9 +151,9 @@ capabilities:
           - Response time to critical decisions (ms)
           - Exception recovery success rate (%)
           - Control flow complexity handling
-        archetypes: L2+ (Critical for autonomous operation)
+        archetypes: T2+ (Critical for autonomous operation)
         
-      CG.PS-004:
+      CG.PS:
         name: Problem Solving & Strategy Formation
         description: The ability to approach novel problems systematically and develop effective solution strategies.
         purpose: Enable effective handling of novel challenges, innovative solutions, and strategic thinking.
@@ -159,4 +161,626 @@ capabilities:
           - Problem space analysis and representation
           - Solution strategy generation and evaluation
           - Analogical reasoning and transfer learning
-          - Creative problem
+          - Creative problem-solving approaches
+        metrics:
+          - Novel problem solving success rate (%)
+          - Strategy effectiveness metrics
+          - Transfer learning performance
+          - Creative solution quality scores
+        archetypes: T3+ (Cognitive and MAGS)
+        
+      CG.PP:
+        name: Formal Planning Integration
+        description: The ability to use formal planning languages like PDDL for domain modeling, problem specification, and automated plan generation.
+        purpose: Enable sophisticated planning capabilities through integration with established planning methodologies and verification systems.
+        key_functions:
+          - PDDL domain and problem definition
+          - Automated planning algorithm integration
+          - Hierarchical task network (HTN) planning
+          - Plan validation and verification
+        metrics:
+          - PDDL problem complexity handling
+          - Plan generation time vs. problem size
+          - Plan optimality scores
+          - Plan validation success rate
+        archetypes: T3+ (Advanced Planning), T4 (Complex MAGS)
+        
+      CG.PA:
+        name: Plan Adaptation & Versioning
+        description: The ability to dynamically modify plans, manage versions with rollback capabilities, and analyze change impacts.
+        purpose: Provide flexible plan management with version control and impact analysis for robust plan evolution.
+        key_functions:
+          - Dynamic plan modification and adaptation
+          - Plan versioning and rollback capabilities
+          - Change impact analysis and propagation
+          - Plan evolution tracking and management
+        metrics:
+          - Plan adaptation success rate
+          - Adaptation response time to changes
+          - Plan version management effectiveness
+          - Change impact prediction accuracy
+        archetypes: T3+ (Adaptive Agents), T4 (Dynamic MAGS)
+
+  LA:
+    name: Learning & Adaptation
+    description: Capabilities for acquiring knowledge, improving performance, and adapting to changing conditions through various learning mechanisms and sophisticated memory management.
+    purpose: Enable continuous improvement and adaptation through diverse learning approaches, advanced memory systems, and self-optimization capabilities.
+    capabilities:
+      LA.MM:
+        name: Memory Formation & Management
+        description: The ability to store, organize, and retrieve different types of memory with sophisticated recall mechanisms.
+        purpose: Provide comprehensive memory capabilities for learning retention, experience accumulation, and knowledge organization.
+        key_functions:
+          - Short-term working memory management
+          - Long-term episodic memory formation
+          - Semantic knowledge structuring
+          - Memory importance scoring and retrieval
+        metrics:
+          - Memory capacity (items/duration)
+          - Retrieval accuracy by recency/importance
+          - Memory persistence across sessions
+          - Supported memory types (episodic/semantic/procedural)
+        archetypes: T1+ (Basic), T3+ (Advanced episodic)
+        
+      LA.RL:
+        name: Reinforcement Learning & Feedback Integration
+        description: The ability to learn optimal behaviors through environmental feedback and reward signals.
+        purpose: Enable performance optimization, autonomous strategy discovery, and alignment with preferences.
+        key_functions:
+          - Trial-and-error exploration strategies
+          - Reward signal processing and policy updates
+          - Human feedback integration (RLHF)
+          - Multi-agent collaborative learning
+        metrics:
+          - Learning curve improvement rate
+          - Sample efficiency (trials to proficiency)
+          - Transfer learning capability
+          - Feedback integration effectiveness
+        archetypes: T3+ (Cognitive autonomous agents)
+        
+      LA.AD:
+        name: Adaptation & Self-Optimization
+        description: The ability to modify behavior and strategies based on experience and changing conditions.
+        purpose: Enable continuous improvement, robustness to change, and meta-cognitive awareness.
+        key_functions:
+          - Performance self-assessment and reflection
+          - Strategy modification based on outcomes
+          - Meta-learning and learning-to-learn
+          - Dynamic goal and priority adjustment
+        metrics:
+          - Performance improvement over time (%)
+          - Adaptation speed to new conditions
+          - Self-correction frequency and effectiveness
+          - Meta-learning transfer success rate
+        archetypes: T3+ (Advanced cognitive capabilities)
+        
+      LA.SL:
+        name: Supervised Learning & Skill Acquisition
+        description: The ability to learn from demonstrations, examples, and explicit instruction.
+        purpose: Enable rapid skill acquisition, customization, and domain adaptation.
+        key_functions:
+          - Few-shot and one-shot learning from examples
+          - Skill transfer and generalization
+          - Human demonstration learning
+          - Knowledge distillation and integration
+        metrics:
+          - Learning efficiency (examples needed)
+          - Skill generalization accuracy (%)
+          - Transfer learning success rate
+          - Retention over time
+        archetypes: All Types (Enhanced T3+)
+        
+      LA.VM:
+        name: Vector Memory Management
+        description: The ability to manage vector-based memory representations for semantic similarity, clustering, and retrieval operations.
+        purpose: Provide efficient semantic memory storage and retrieval capabilities for knowledge-based reasoning and decision-making.
+        key_functions:
+          - Vector embedding generation and management
+          - Semantic similarity search and clustering
+          - Multi-provider vector database support
+          - Vector memory optimization and indexing
+        metrics:
+          - Vector similarity search accuracy (%)
+          - Memory retrieval latency (ms)
+          - Supported vector dimensions and similarity metrics
+          - Vector index optimization effectiveness
+        archetypes: T3+ (Cognitive with Advanced Memory)
+        
+      LA.MS:
+        name: Memory Significance Scoring
+        description: The ability to assess and score memory significance based on importance, surprise, relevance, and trust factors.
+        purpose: Enable intelligent memory prioritization, efficient knowledge retention, and adaptive learning focus.
+        key_functions:
+          - Importance scoring based on relevance and frequency
+          - Surprise detection for novel information
+          - Trust factor evaluation and weighting
+          - Memory consolidation based on significance scores
+        metrics:
+          - Memory retention accuracy by significance score
+          - Surprise detection precision/recall
+          - Trust factor correlation with outcomes
+          - Memory consolidation effectiveness
+        archetypes: T3+ (Advanced Cognitive Agents)
+
+  AE:
+    name: Action & Execution
+    description: Capabilities for translating decisions and plans into tangible outputs, tool usage, environmental effects, and systematic implementation.
+    purpose: Transform cognitive processes into concrete actions through task execution, tool integration, content generation, and advanced lifecycle management.
+    capabilities:
+      AE.TX:
+        name: Task Execution & Implementation
+        description: The ability to carry out planned actions and complete assigned tasks reliably.
+        purpose: Provide reliable task completion capabilities with quality assurance and systematic progress monitoring.
+        key_functions:
+          - Instruction following and procedure execution
+          - Quality control and validation
+          - Progress tracking and status reporting
+          - Error detection and correction
+        metrics:
+          - Task completion rate (%)
+          - Output quality scores
+          - Execution time efficiency
+          - Error detection and correction rate
+        archetypes: All Types (T1-T4)
+        
+      AE.TL:
+        name: Tool Usage & API Integration
+        description: The ability to utilize external tools, services, and APIs to extend capabilities dynamically.
+        purpose: Enable flexible integration with external tools and services for expanded capability and functionality.
+        key_functions:
+          - Dynamic tool selection based on task needs
+          - API authentication and secure access
+          - Tool output interpretation and integration
+          - Tool chaining and workflow orchestration
+        metrics:
+          - Number of supported tools/APIs
+          - Tool selection accuracy (%)
+          - API call success rate (%)
+          - Tool chain execution reliability
+        archetypes: T2+ (Critical for workflow agents)
+        
+      AE.CG:
+        name: Code Generation & Execution
+        description: The ability to write, execute, and debug programming code across multiple languages.
+        purpose: Provide programming capabilities for dynamic solution creation, automation, and system integration.
+        key_functions:
+          - Multi-language code generation
+          - Secure code execution in sandboxed environments
+          - Automated testing and validation
+          - Code refactoring and optimization
+        metrics:
+          - Code correctness rate (%)
+          - Supported programming languages
+          - Execution security (vulnerability scan results)
+          - Code efficiency metrics
+        archetypes: T2+ (Workflow and cognitive agents)
+        
+      AE.CX:
+        name: Content Creation & Generation
+        description: The ability to create novel content across various formats and modalities.
+        purpose: Enable comprehensive content creation across multiple formats and styles for diverse communication and output needs.
+        key_functions:
+          - Text generation (documents, reports, creative writing)
+          - Image and visual content creation
+          - Audio and multimedia generation
+          - Structured data and format conversion
+        metrics:
+          - Content quality ratings (human evaluation)
+          - Format diversity supported
+          - Generation speed (tokens/images per second)
+          - Consistency and coherence metrics
+        archetypes: T1+ (Enhanced for T3+ cognitive)
+        
+      AE.TM:
+        name: Tool Lifecycle Management
+        description: The ability to manage tool lifecycles, including discovery, initialization, execution, monitoring, and cleanup.
+        purpose: Provide systematic management of tool ecosystems for efficient resource utilization and capability orchestration.
+        key_functions:
+          - Dynamic tool discovery and registration
+          - Tool initialization and configuration management
+          - Execution monitoring and performance tracking
+          - Resource cleanup and lifecycle termination
+        metrics:
+          - Tool discovery and registration success rate
+          - Tool lifecycle management efficiency
+          - Resource cleanup effectiveness
+          - Tool performance monitoring coverage
+        archetypes: T2+ (Tool-Using Agents), T4 (Complex Tool Ecosystems)
+        
+      AE.MC:
+        name: MCP Integration
+        description: The ability to integrate with Model Context Protocol servers for extended tool and resource capabilities.
+        purpose: Enable standardized integration with external capabilities and context sources through established protocols.
+        key_functions:
+          - MCP server discovery and configuration
+          - Protocol-compliant communication and parameter validation
+          - Extended context and capability integration
+          - MCP session management and error handling
+        metrics:
+          - MCP server integration success rate
+          - Protocol compliance validation
+          - Extended capability utilization
+          - Session reliability and error recovery
+        archetypes: T3+ (Advanced Tool Integration), T4 (Enterprise MAGS)
+
+  IC:
+    name: Interaction & Collaboration
+    description: Capabilities for communication, coordination, system integration, and distributed collaboration across humans, agents, and complex systems.
+    purpose: Enable seamless interaction and collaboration between agents, humans, and systems through advanced communication, coordination, and integration capabilities.
+    capabilities:
+      IC.NL:
+        name: Natural Language Interaction
+        description: The ability to understand and generate natural language for effective human communication.
+        purpose: Provide natural and effective communication capabilities for human-agent interaction across languages and contexts.
+        key_functions:
+          - Multi-language understanding and generation
+          - Conversational context management
+          - Intent recognition and response generation
+          - Tone and style adaptation
+        metrics:
+          - Language support coverage
+          - Conversation satisfaction scores
+          - Intent recognition accuracy (%)
+          - Response appropriateness ratings
+        archetypes: All Types (T1-T4)
+        
+      IC.DM:
+        name: Dialogue & Conversation Management
+        description: The ability to maintain coherent multi-turn conversations and manage dialogue flow.
+        purpose: Enable coherent and contextual conversations with effective dialogue management and error recovery capabilities.
+        key_functions:
+          - Turn-taking and conversation state tracking
+          - Topic management and transition handling
+          - Clarification requests and disambiguation
+          - Conversation repair and recovery
+        metrics:
+          - Average conversation length (turns)
+          - Conversation coherence scores
+          - Topic transition smoothness
+          - User engagement metrics
+        archetypes: T1+ (Critical for conversational agents)
+        
+      IC.HL:
+        name: Human-in-the-Loop Integration
+        description: The ability to seamlessly incorporate human oversight and intervention.
+        purpose: Ensure appropriate human oversight and control in agent decision-making processes with clear escalation mechanisms.
+        key_functions:
+          - Human approval checkpoints
+          - Escalation and handoff mechanisms
+          - Feedback incorporation workflows
+          - Transparent decision boundaries
+        metrics:
+          - Human intervention ease score
+          - Escalation accuracy (%)
+          - Feedback integration effectiveness
+          - Decision transparency ratings
+        archetypes: All Types (Critical tasks)
+        
+      IC.AC:
+        name: Agent-to-Agent Communication
+        description: The ability to communicate and coordinate with other AI agents using standardized protocols.
+        purpose: Enable effective communication and coordination between multiple agents for collaborative task execution.
+        key_functions:
+          - Standardized communication protocols (A2A, ACP, MCP)
+          - Message formatting and parsing
+          - Coordination and synchronization
+          - Conflict resolution and negotiation
+        metrics:
+          - Supported communication protocols
+          - Message delivery reliability (%)
+          - Coordination efficiency metrics
+          - Conflict resolution success rate
+        archetypes: T2+ (Multi-agent systems)
+        
+      IC.CL:
+        name: Collaborative Task Execution
+        description: The ability to work jointly with humans and agents toward common goals.
+        purpose: Provide systematic collaboration capabilities for multi-agent teams working toward common objectives.
+        key_functions:
+          - Role-based task distribution
+          - Progress synchronization and status sharing
+          - Collaborative decision making
+          - Knowledge and resource sharing
+        metrics:
+          - Collaborative task success rate (%)
+          - Team coordination efficiency
+          - Knowledge sharing effectiveness
+          - Role specialization benefits
+        archetypes: T2+ (Workflow agents), T4 (MAGS)
+        
+      IC.RB:
+        name: Role-Based Behavior & Specialization
+        description: The ability to adopt specific roles, personas, and specialized behavioral patterns.
+        purpose: Enable specialized expertise and appropriate behavioral adaptation based on assigned roles and responsibilities.
+        key_functions:
+          - Role profile implementation and consistency
+          - Specialized domain knowledge application
+          - Behavioral adaptation to role requirements
+          - Multi-role capability switching
+        metrics:
+          - Role consistency score (0-1)
+          - Specialization effectiveness metrics
+          - Role switching accuracy
+          - Team contribution quality
+        archetypes: T2+ (Workflow and cognitive)
+        
+      IC.CS:
+        name: Consensus Protocol Management
+        description: The ability to manage formal consensus protocols, detect conflicts, and coordinate group decision-making processes.
+        purpose: Provide robust consensus mechanisms for reliable distributed decision-making in multi-agent environments.
+        key_functions:
+          - Multi-round consensus protocols with timeout handling
+          - Conflict detection across resource allocation and task dependencies
+          - Byzantine fault tolerance in distributed decision-making
+          - Consensus state tracking and recovery mechanisms
+        metrics:
+          - Consensus convergence time (seconds)
+          - Conflict detection accuracy (%)
+          - Byzantine fault tolerance threshold
+          - Consensus success rate under network partitions (%)
+        archetypes: T4 (MAGS), Industrial Multi-Agent Systems
+        
+      IC.CF:
+        name: Conflict Detection & Resolution
+        description: The ability to detect, analyze, and resolve conflicts between agents in resource allocation, task dependencies, and decision-making.
+        purpose: Ensure smooth collaboration by detecting and resolving conflicts between agents and resource allocation.
+        key_functions:
+          - Resource contention detection and analysis
+          - Task dependency conflict identification
+          - Automated conflict resolution strategies
+          - Escalation mechanisms for unresolvable conflicts
+        metrics:
+          - Conflict detection latency (ms)
+          - Automated resolution success rate (%)
+          - Escalation frequency (conflicts/hour)
+          - System deadlock prevention effectiveness
+        archetypes: T4 (MAGS), Complex Multi-Agent Workflows
+        
+      IC.SI:
+        name: Industrial System Integration
+        description: The ability to integrate with industrial IoT devices, SCADA systems, PLCs, and operational technology infrastructure.
+        purpose: Enable seamless integration with industrial control systems and operational technology environments.
+        key_functions:
+          - Native MQTT broker integration for industrial messaging
+          - SCADA system connectivity and data exchange
+          - PLC communication protocols (Modbus, OPC-UA, etc.)
+          - Industrial network protocol support (Ethernet/IP, PROFINET)
+        metrics:
+          - Supported industrial protocols (count)
+          - Real-time data latency (ms)
+          - Industrial device connectivity success rate (%)
+          - Protocol conversion accuracy
+        archetypes: T4 (Industrial MAGS), Manufacturing Systems
+        
+      IC.ES:
+        name: Enterprise System Integration
+        description: The ability to integrate with enterprise APIs, protocols, and middleware systems for seamless business process integration.
+        purpose: Provide broad enterprise system integration capabilities for complex organizational technology environments.
+        key_functions:
+          - RESTful and GraphQL API integration
+          - Enterprise service bus (ESB) connectivity
+          - Message queue integration (RabbitMQ, ActiveMQ)
+          - Enterprise protocol support (SOAP, EDI, AS2)
+        metrics:
+          - Enterprise API coverage (systems integrated)
+          - API call reliability and performance
+          - Protocol conversion accuracy
+          - Business process integration success rate
+        archetypes: T3+ (Enterprise Systems), T4 (Enterprise MAGS)
+        
+      IC.MB:
+        name: Message Brokers & Event Streaming
+        description: The ability to integrate with enterprise messaging infrastructure for reliable, scalable agent communication and system integration.
+        purpose: Enable scalable event processing and real-time data streaming for responsive and efficient system operation.
+        key_functions:
+          - MQTT integration for IoT/industrial messaging
+          - Apache Kafka for high-throughput event streaming
+          - RabbitMQ for enterprise message queuing
+          - Cloud messaging services (Azure Service Bus, AWS SQS/SNS)
+          - Event-driven architecture implementation
+        metrics:
+          - Supported messaging protocols (MQTT, Kafka, RabbitMQ, etc.)
+          - Message delivery reliability (%)
+          - Throughput capacity (messages/second)
+          - Integration with industrial systems (SCADA, PLCs)
+          - Event processing latency (ms)
+        archetypes: T2+ (Critical for Industrial MAGS), T4
+        
+      IC.DS:
+        name: Distributed Systems Coordination
+        description: The ability to implement comprehensive telemetry, distributed tracing, and observability across multi-agent systems with lifecycle management.
+        purpose: Provide comprehensive coordination and monitoring capabilities for complex distributed agent systems.
+        key_functions:
+          - OpenTelemetry integration and trace collection
+          - Distributed metrics aggregation and analysis
+          - Cross-agent correlation and dependency mapping
+          - Agent startup, state transitions, and graceful shutdown
+          - Resource allocation and cleanup automation
+        metrics:
+          - Telemetry data coverage (% of system components)
+          - Trace completeness and accuracy
+          - Agent initialization success rate
+          - Resource cleanup effectiveness
+          - Distributed performance correlation accuracy
+        archetypes: T4 (Production MAGS), Enterprise Multi-Agent Systems
+
+  GS:
+    name: Governance & Safety
+    description: Comprehensive capabilities ensuring safe, secure, ethical, and reliable agent operation with effective management, oversight, and trust mechanisms.
+    purpose: Ensure responsible, secure, and reliable agent operation through comprehensive governance, safety measures, operational oversight, and trust management.
+    capabilities:
+      GS.DL:
+        name: Deployment & Lifecycle Management
+        description: The ability to deploy, update, and manage agent systems throughout their operational lifecycle.
+        purpose: Provide systematic deployment and lifecycle management for reliable agent system operations and maintenance.
+        key_functions:
+          - Automated deployment and provisioning
+          - Version control and rollback capabilities
+          - Configuration management
+          - Retirement and decommissioning
+        metrics:
+          - Deployment success rate (%)
+          - Rollback time (minutes)
+          - Configuration drift detection
+          - Lifecycle stage transition efficiency
+        archetypes: All Production Deployments (T1-T4)
+        
+      GS.MO:
+        name: Monitoring & Observability
+        description: The ability to monitor agent performance, behavior, and system health comprehensively.
+        purpose: Enable comprehensive system monitoring and observability for proactive maintenance and performance optimization.
+        key_functions:
+          - Real-time performance metrics collection
+          - Behavioral anomaly detection
+          - System health monitoring
+          - Alert generation and escalation
+        metrics:
+          - Monitoring coverage (% system components)
+          - Alert accuracy (true positive rate)
+          - Mean Time to Detection (MTTD)
+          - Dashboard usability scores
+        archetypes: All Production Deployments (T1-T4)
+        
+      GS.EV:
+        name: Evaluation & Performance Assessment
+        description: The ability to evaluate agent capabilities and measure performance against defined objectives.
+        purpose: Provide objective assessment capabilities for measuring and comparing agent performance and capabilities.
+        key_functions:
+          - Automated capability testing
+          - Performance benchmarking
+          - Quality assessment metrics
+          - Comparative analysis tools
+        metrics:
+          - Benchmark coverage (% capabilities)
+          - Assessment automation level (%)
+          - Evaluation consistency (inter-rater reliability)
+          - Performance trend accuracy
+        archetypes: All Types (Critical for anti-agent washing)
+        
+      GS.SC:
+        name: Scaling & Resource Management
+        description: The ability to scale agent operations and manage computational resources efficiently.
+        purpose: Enable efficient resource utilization and system scaling to meet varying operational demands and cost optimization.
+        key_functions:
+          - Dynamic scaling based on demand
+          - Resource allocation optimization
+          - Load balancing and distribution
+          - Cost optimization strategies
+        metrics:
+          - Scaling response time (seconds)
+          - Resource utilization efficiency (%)
+          - Cost per task/interaction
+          - Performance under varying loads
+        archetypes: T2+ (Production systems)
+        
+      GS.SF:
+        name: Safety & Risk Management
+        description: The ability to operate safely without causing harm to humans, systems, or processes.
+        purpose: Ensure safe operation through comprehensive risk management and safety constraint enforcement mechanisms.
+        key_functions:
+          - Risk assessment and mitigation
+          - Safety constraint enforcement
+          - Hazard detection and prevention
+          - Emergency stop and recovery
+        metrics:
+          - Safety incident rate (incidents/time)
+          - Risk assessment accuracy
+          - Constraint violation frequency
+          - Emergency response time
+        archetypes: All Types (Critical T3-T4 autonomous)
+        
+      GS.SE:
+        name: Security & Access Control
+        description: The ability to protect against unauthorized access and maintain comprehensive data security.
+        purpose: Provide robust security framework for protecting agent systems and data from unauthorized access and threats.
+        key_functions:
+          - Authentication and authorization
+          - Data encryption and secure communication
+          - Threat detection and response
+          - Security audit and compliance
+        metrics:
+          - Security vulnerability count
+          - Authentication success rate (%)
+          - Data breach incidents (target: 0)
+          - Compliance audit results
+        archetypes: All Types (T1-T4)
+        
+      GS.EX:
+        name: Explainability & Transparency
+        description: The ability to provide understandable explanations for decisions and actions.
+        purpose: Enable understanding and trust through transparent decision-making processes and explainable agent behavior.
+        key_functions:
+          - Decision rationale generation
+          - Causal chain explanation
+          - Confidence level reporting
+          - Interpretable model outputs
+        metrics:
+          - Explanation completeness scores
+          - User understanding ratings
+          - Decision traceability (%)
+          - Explanation consistency
+        archetypes: T2+ (Critical for autonomous decisions)
+        
+      GS.RL:
+        name: Reliability & Robustness
+        description: The ability to perform consistently under various conditions and recover from failures.
+        purpose: Ensure dependable operation through robust error handling and consistent performance across varying conditions.
+        key_functions:
+          - Fault tolerance and graceful degradation
+          - Error detection and recovery
+          - Performance consistency maintenance
+          - Stress testing and validation
+        metrics:
+          - System uptime (%)
+          - Mean Time Between Failures (MTBF)
+          - Recovery time from failures (MTTR)
+          - Performance variance under load
+        archetypes: All Production Systems (T1-T4)
+        
+      GS.ET:
+        name: Ethics & Bias Mitigation
+        description: The ability to operate ethically and fairly across diverse populations and contexts.
+        purpose: Ensure ethical operation through bias mitigation and fair treatment across diverse populations and scenarios.
+        key_functions:
+          - Bias detection and correction
+          - Ethical decision framework implementation
+          - Fairness metric monitoring
+          - Cultural sensitivity adaptation
+        metrics:
+          - Bias detection accuracy (%)
+          - Fairness metrics across demographics
+          - Ethical compliance scores
+          - Cultural adaptation effectiveness
+        archetypes: All Types (Enhanced T3+)
+        
+      GS.PR:
+        name: Privacy & Data Protection
+        description: The ability to protect user privacy and handle sensitive data appropriately.
+        purpose: Protect individual privacy rights through comprehensive data protection and privacy-preserving operational practices.
+        key_functions:
+          - Personal data identification and protection
+          - Privacy-preserving computation
+          - Consent management and enforcement
+          - Data minimization and anonymization
+        metrics:
+          - Privacy breach incidents (target: 0)
+          - Consent management effectiveness
+          - Data minimization success rate (%)
+          - Anonymization quality scores
+        archetypes: All Types (T1-T4)
+        
+      GS.TC:
+        name: Trust & Confidence Management
+        description: The ability to assess and manage trust levels and confidence scores for decisions, memories, and agent interactions.
+        purpose: Build and maintain trust through systematic confidence assessment and transparent trust relationship management.
+        key_functions:
+          - Multi-factor trust assessment (reasoning, evidence, consistency, stability)
+          - Confidence score calculation and propagation
+          - Trust relationship modeling between agents
+          - Confidence-based decision weighting
+        metrics:
+          - Trust assessment accuracy vs. outcomes
+          - Confidence score correlation with success rates
+          - Trust propagation effectiveness in multi-agent systems
+          - Decision reliability improvement with confidence weighting
+        archetypes: T3+ (Autonomous Decision-Making), T4 (Trust-Critical MAGS)
