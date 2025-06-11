@@ -1,0 +1,33 @@
+# AI Agent Capabilities Periodic Table Schema
+header:
+  title: str()
+  version: str()
+  description: str()
+  usage: str()
+  maintainer: str()
+  license: str()
+  license_attribution_entity: str()
+  license_comments: str()
+  robots_instructions: str()
+  maturity_levels: map(str(), str())
+  category_structure: str()
+
+capabilities: map(include('category'))
+
+---
+# Category definition
+category:
+  name: str()
+  description: str()
+  purpose: str()
+  capabilities: map(include('capability'))
+
+---
+# Individual capability definition
+capability:
+  name: str()
+  description: str()
+  purpose: str()
+  key_functions: list(str())
+  metrics: list(str())
+  archetypes: str()

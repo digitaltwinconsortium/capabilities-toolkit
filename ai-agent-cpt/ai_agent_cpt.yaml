@@ -1,0 +1,162 @@
+header:
+  title: AI Agent Capabilities Periodic Table
+  version: '3.1'
+  description: >
+    This YAML file contains a comprehensive catalogue of capabilities for AI Agent systems,
+    organized into a streamlined 6-category 'periodic table' structure. It covers all aspects 
+    of AI Agent technology including perception, cognition, learning, action, interaction, and 
+    governance. Version 3.1 incorporates enhanced industrial and enterprise capabilities 
+    identified through analysis of production MAGS systems like XMPro, addressing critical gaps 
+    in consensus management, system integration, and distributed coordination.
+  usage: >
+    This file can be used for reference, planning, and implementation of AI Agent systems,
+    capability assessment and anti-agent washing validation, architectural pattern selection,
+    as well as for educational and research purposes in AI Agent technology and Multi-Agent 
+    Generative Systems (MAGS).
+  license: CC BY-SA
+  license_attribution_entity: AI Agent CPT Working Group
+  license_comments: >
+    All derived content must include a CC BY-SA 4.0 license with reference to the license_attribution_entity.
+    For more details, visit https://creativecommons.org/licenses/by-sa/4.0/.
+  maintainer: AI Agent CPT Working Group - Anti-Agent Washing Initiative
+  robots_instructions: Follow the terms of the license when generating or deriving content.
+  maturity_levels:
+    L0: Static Automation (not truly agentic)
+    L1: Conversational Agents
+    L2: Procedural Workflow Agents  
+    L3: Cognitive Autonomous Agents
+    L4: Multi-Agent Generative Systems (MAGS)
+  category_structure: Streamlined 6-category framework for comprehensive capability coverage
+
+capabilities:
+  PK:
+    name: Perception & Knowledge
+    description: Capabilities enabling agents to perceive inputs, access knowledge, and maintain contextual understanding across interactions with sophisticated memory management.
+    purpose: Provide comprehensive environmental awareness, knowledge access, and contextual memory for informed agent behavior.
+    capabilities:
+      PK.OB-001:
+        name: Environmental Sensing & Observation
+        description: The ability to receive and interpret input from the agent's operational environment across multiple modalities.
+        purpose: Enable contextually aware responses, environmental state awareness, and timely reaction to changes.
+        key_functions:
+          - Processing natural language text, voice, and multimodal inputs
+          - Analyzing visual data (images, documents, diagrams)
+          - Ingesting structured/unstructured data streams
+          - Real-time event detection and pattern recognition
+        metrics:
+          - Intent recognition accuracy (%)
+          - Supported modalities (text/voice/image/video)
+          - Input processing latency (ms)
+          - Pattern detection precision/recall
+        archetypes: All Levels (L1-L4)
+        
+      PK.KB-002:
+        name: Knowledge Base Access & Management
+        description: The ability to connect to, retrieve from, and update internal/external knowledge sources with semantic understanding.
+        purpose: Enable informed decision-making beyond pre-trained knowledge, factual accuracy, and domain expertise.
+        key_functions:
+          - Vector database semantic search and retrieval
+          - SQL/NoSQL database querying
+          - Knowledge graph traversal and reasoning
+          - Real-time information synthesis from multiple sources
+        metrics:
+          - Query response time (ms)
+          - Retrieval relevance score (0-1)
+          - Knowledge source diversity (count)
+          - Update/write capability (Y/N)
+        archetypes: All Levels
+        
+      PK.CX-003:
+        name: Contextual Understanding & Memory
+        description: The ability to comprehend and maintain relevant context across interactions and time with sophisticated memory management.
+        purpose: Enable coherent long-term interactions, personalized responses, and learning from experience.
+        key_functions:
+          - Multi-turn conversation context tracking
+          - Long-term episodic memory formation and retrieval
+          - Contextual entity resolution and relationship mapping
+          - Temporal context maintenance across sessions
+        metrics:
+          - Context window size (tokens/turns)
+          - Long-term memory retention (days/weeks)
+          - Context relevance accuracy (%)
+          - Cross-session continuity score
+        archetypes: L2+ (Critical for workflow and cognitive)
+        
+      PK.MF-004:
+        name: Multi-Modal Data Fusion
+        description: The ability to integrate and reason over information from multiple modalities with cross-modal understanding.
+        purpose: Enable richer understanding of complex situations, enhanced situational awareness, and nuanced insights.
+        key_functions:
+          - Combining textual descriptions with visual evidence
+          - Audio-visual-text correlation and reasoning
+          - Cross-modal semantic alignment
+          - Unified multimodal representation
+        metrics:
+          - VQA (Visual Question Answering) performance
+          - Cross-modal consistency scores
+          - Multimodal reasoning benchmark results
+          - Supported modality combinations
+        archetypes: Advanced Conversational, Workflow, Cognitive
+
+  CG:
+    name: Cognition & Reasoning
+    description: Core cognitive abilities enabling rational, goal-directed behavior through planning, reasoning, strategic problem-solving, and formal planning integration.
+    purpose: Provide systematic thinking, decision-making, problem-solving, and advanced planning capabilities for complex agent behaviors.
+    capabilities:
+      CG.PL-001:
+        name: Planning & Goal Decomposition
+        description: The ability to break down complex goals into executable plans and sub-tasks with strategic foresight.
+        purpose: Enable systematic approach to complex problems, efficient resource utilization, and structured execution.
+        key_functions:
+          - Hierarchical task decomposition
+          - Sequential and parallel planning strategies
+          - Resource allocation and constraint satisfaction
+          - Plan adaptation based on feedback
+        metrics:
+          - Plan coherence score (0-1)
+          - Task completion rate (%)
+          - Plan adaptation frequency
+          - Sub-goal feasibility assessment
+        archetypes: L2+ (Procedural workflow and above)
+        
+      CG.RS-002:
+        name: Logical & Commonsense Reasoning
+        description: The ability to apply logical inference and commonsense knowledge to draw sound conclusions.
+        purpose: Enable sound judgments, accurate inferences, and human-like understanding.
+        key_functions:
+          - Deductive, inductive, and abductive reasoning
+          - Causal relationship understanding
+          - Mathematical and symbolic reasoning
+          - Social and cultural context reasoning
+        metrics:
+          - Logical reasoning benchmark scores
+          - Mathematical problem accuracy (%)
+          - Commonsense reasoning test performance
+          - Consistency across reasoning types
+        archetypes: L2+ (Enhanced for L3 cognitive)
+        
+      CG.DC-003:
+        name: Decision Making & Control Flow
+        description: The ability to make autonomous decisions and control execution flow under uncertainty.
+        purpose: Enable autonomous operation, robust execution, and adaptive behavior.
+        key_functions:
+          - Multi-criteria decision analysis
+          - Risk assessment and uncertainty handling
+          - Dynamic control flow management
+          - Exception handling and recovery
+        metrics:
+          - Decision accuracy under uncertainty (%)
+          - Response time to critical decisions (ms)
+          - Exception recovery success rate (%)
+          - Control flow complexity handling
+        archetypes: L2+ (Critical for autonomous operation)
+        
+      CG.PS-004:
+        name: Problem Solving & Strategy Formation
+        description: The ability to approach novel problems systematically and develop effective solution strategies.
+        purpose: Enable effective handling of novel challenges, innovative solutions, and strategic thinking.
+        key_functions:
+          - Problem space analysis and representation
+          - Solution strategy generation and evaluation
+          - Analogical reasoning and transfer learning
+          - Creative problem
