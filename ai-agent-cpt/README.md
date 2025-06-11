@@ -7,7 +7,7 @@ The AI Agent Capabilities Periodic Table (AIA CPT) is comprised of six core capa
 The AIA CPT addresses growing market confusion where systems with vastly different capabilities are labeled agents or agentic AI. The new framework applies the same proven methodology that clarified the digital twin market with the Digital Twin Capabilities Periodic Table (DT CPT).
 
 ## Bringing AI Into the Real World
-The AIA CPT can be used on its own to shape your agentic AI strategy across any domain. But if your business operates beyond software, you’ll eventually need AI to act in the physical world—that’s where the Digital Twin Capabilities Periodic Table (DT CPT) comes in. Together, they bridge digital intelligence and real-world action.
+The AIA CPT can be used on its own to shape your agentic AI strategy across any domain. But if your business operates beyond software, you'll eventually need AI to act in the physical world—that's where the Digital Twin Capabilities Periodic Table (DT CPT) comes in. Together, they bridge digital intelligence and real-world action.
 
 As Dr. Michael Grieves (who coined the term Digital Twin) notes in his paper: Intelligent digital twins and the development and management of complex systems, complex modern systems are "beyond human processing capabilities" and require intelligent digital twins that can actively manage and optimize operations. The combination of DT CPT and AIA CPT frameworks provides organizations with a comprehensive roadmap for implementing these next-generation systems. 
 
@@ -88,20 +88,50 @@ Collaborative intelligence with emergent behaviours and distributed coordination
 Industrial automation, smart city systems, complex orchestration
 The complimentary frameworks are particularly valuable for organizations developing Industry 4.0 solutions, smart cities, autonomous systems, or any scenario where digital representations need to exhibit intelligent, adaptive behaviour.
 
-## Files
+## Framework Resources
 
-- `aiacpt.yaml` - Main capabilities definition file
-- `docs/` - Documentation and specifications
-- `examples/` - Usage examples and implementations
-- `schemas/` - Validation schemas and tools
+### Core Definition Files
+- **`ai_agent_cpt.yaml`** - Complete capabilities definition with all six categories and detailed subcategories
+- **`ai_agent_cpt_schema.yaml`** - Schema validation file for the framework structure
+- **`aia_cpt_user_guide.md`** - Comprehensive user guide in Markdown format
+
+### Documentation Suite
+- **`user_guide.pdf`** - Complete user guide (PDF format)
+- **`user_guide.docx`** - User guide in Word format for editing and customization
+- **`worksheet.pdf`** - Assessment worksheet for capability evaluation (PDF format)
+- **`worksheet.xlsx`** - Interactive assessment worksheet (Excel format)
+
+### Integration Resources
+- **`framework_integration.pdf`** - Integration guide combining Digital Twin CPT and AI Agent CPT
+- **`framework_integration.pptx`** - Framework comparison and integration presentation
+
+### Implementation Tools
+- **`prompts/`** - Prompt engineering resources and sequence templates for systematic capability assessment
+- **`examples/`** - Interactive tools, generators, and implementation examples including:
+  - Advanced AI agent CPT generators
+  - Jupyter notebook tools (AIA CPT Generator v1)
+  - Basic implementation examples
+  - Real-world use case implementations (energy grid, smart systems)
+  - Interactive web-based capability explorers
+
+## Getting Started
+
+1. **Read the User Guide** - Start with `user_guide.pdf` or `aia_cpt_user_guide.md` for comprehensive framework understanding
+2. **Use the Assessment Worksheet** - Evaluate your current capabilities with `worksheet.xlsx`
+3. **Explore Prompt Resources** - Check `prompts/` for structured assessment sequences
+4. **Try Interactive Tools** - Use `examples/` for hands-on capability exploration
+5. **Review Integration Guide** - See `framework_integration.pdf` for combining with Digital Twin CPT
 
 ## Usage
 
-This file can be used for:
-- Reference and planning of AI Agent systems
-- Implementation guidance for AI Agent technology
-- Educational and research purposes in AI Agent development
-- Capability assessment and gap analysis
+This framework can be used for:
+- **Reference and planning** of AI Agent systems
+- **Implementation guidance** for AI Agent technology
+- **Educational and research purposes** in AI Agent development
+- **Capability assessment and gap analysis**
+- **Vendor evaluation** using standardized capability criteria
+- **Strategic planning** for agentic AI initiatives
+- **Integration planning** with Digital Twin systems
 
 ## License
 
@@ -110,6 +140,12 @@ Creative Commons License
 This work is licensed under [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 All derived content must include a CC BY-SA 4.0 license with reference to the original work.
+
+## More Information
+
+- **Website**: https://www.digitaltwinconsortium.org/initiatives/ai-agent-capabilities-periodic-table/
+- **Digital Twin Consortium**: https://www.digitaltwinconsortium.org/
+- **Digital Twin CPT**: ../digital-twin-cpt/
 
 ## Contributing
 
