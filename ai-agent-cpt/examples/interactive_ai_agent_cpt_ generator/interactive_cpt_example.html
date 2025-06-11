@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Capabilities Periodic Table v1.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .use-case-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .use-case-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .use-case-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .use-case-btn.active {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .capability-block {
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .capability-id {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .capability-name {
+            line-height: 1.2;
+        }
+
+        /* Category Colors */
+        .pk {
+            background-color: #D1DCEA;
+            border-color: #7A9BC4;
+            color: #13386D;
+        }
+
+        .cg {
+            background-color: #FAEAD5;
+            border-color: #D4A571;
+            color: #945911;
+        }
+
+        .la {
+            background-color: #E3DDEC;
+            border-color: #A18DB5;
+            color: #4E3D6F;
+        }
+
+        .ae {
+            background-color: #EEEEEE;
+            border-color: #999999;
+            color: #404040;
+        }
+
+        .ic {
+            background-color: #D5E3E1;
+            border-color: #7FA596;
+            color: #295548;
+        }
+
+        .gs {
+            background-color: #EDD9D5;
+            border-color: #C78275;
+            color: #792D21;
+        }
+
+        .hidden {
+            opacity: 0.2;
+            transform: scale(0.95);
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: auto;
+            }
+            
+            .capability-block {
+                font-size: 12px;
+                padding: 8px;
+                min-height: 60px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Agent Capabilities Periodic Table v1.0</h1>
+        
+        <!-- Use Case Selector -->
+        <div class="use-case-selector">
+            <button class="use-case-btn active" data-usecase="all">All Capabilities</button>
+            <button class="use-case-btn" data-usecase="customer_service">Customer Service Bot</button>
+            <button class="use-case-btn" data-usecase="industrial">Industrial MAGS</button>
+            <button class="use-case-btn" data-usecase="research">Research Assistant</button>
+            <button class="use-case-btn" data-usecase="workflow">Workflow Automation</button>
+        </div>
+
+        <!-- Capability Grid -->
+        <div class="grid-container" id="capabilityGrid">
+            <!-- Capabilities will be populated by JavaScript -->
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color pk" style="background-color: #D1DCEA; border-color: #7A9BC4;"></div>
+                Perception & Knowledge
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cg" style="background-color: #FAEAD5; border-color: #D4A571;"></div>
+                Cognition & Reasoning
+            </div>
+            <div class="legend-item">
+                <div class="legend-color la" style="background-color: #E3DDEC; border-color: #A18DB5;"></div>
+                Learning & Adaptation
+            </div>
+            <div class="legend-item">
+                <div class="legend-color ae" style="background-color: #EEEEEE; border-color: #999999;"></div>
+                Action & Execution
+            </div>
+            <div class="legend-item">
+                <div class="legend-color ic" style="background-color: #D5E3E1; border-color: #7FA596;"></div>
+                Interaction & Collaboration
+            </div>
+            <div class="legend-item">
+                <div class="legend-color gs" style="background-color: #EDD9D5; border-color: #C78275;"></div>
+                Governance & Safety
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Capability data
+        const capabilities = [
+            // Perception & Knowledge (blue)
+            { id: 'PK.OB', name: 'Environmental Sensing', category: 'pk', row: 3, col: 1 },
+            { id: 'PK.KB', name: 'Knowledge Access', category: 'pk', row: 4, col: 1 },
+            { id: 'PK.CX', name: 'Context & Memory', category: 'pk', row: 5, col: 1 },
+            { id: 'PK.MF', name: 'Multi-Modal Fusion', category: 'pk', row: 6, col: 1 },
+            
+            // Cognition & Reasoning (amber)
+            { id: 'CG.PL', name: 'Planning & Decomposition', category: 'cg', row: 1, col: 2 },
+            { id: 'CG.RS', name: 'Reasoning', category: 'cg', row: 2, col: 2 },
+            { id: 'CG.DC', name: 'Decision Making', category: 'cg', row: 3, col: 2 },
+            { id: 'CG.PS', name: 'Problem Solving', category: 'cg', row: 4, col: 2 },
+            { id: 'CG.PP', name: 'Formal Planning', category: 'cg', row: 5, col: 2 },
+            { id: 'CG.PA', name: 'Plan Adaptation', category: 'cg', row: 6, col: 2 },
+            
+            // Learning & Adaptation (purple)
+            { id: 'LA.MM', name: 'Memory Management', category: 'la', row: 1, col: 3 },
+            { id: 'LA.RL', name: 'Reinforcement Learning', category: 'la', row: 2, col: 3 },
+            { id: 'LA.AD', name: 'Self-Optimization', category: 'la', row: 3, col: 3 },
+            { id: 'LA.SL', name: 'Supervised Learning', category: 'la', row: 4, col: 3 },
+            { id: 'LA.VM', name: 'Vector Memory', category: 'la', row: 5, col: 3 },
+            { id: 'LA.MS', name: 'Memory Scoring', category: 'la', row: 6, col: 3 },
+            
+            // Action & Execution (gray)
+            { id: 'AE.TX', name: 'Task Execution & Implementation', category: 'ae', row: 2, col: 4 },
+            { id: 'AE.TL', name: 'Tool Usage & API Integration', category: 'ae', row: 3, col: 4 },
+            { id: 'AE.CG', name: 'Code Generation & Execution', category: 'ae', row: 4, col: 4 },
+            { id: 'AE.CX', name: 'Content Creation & Generation', category: 'ae', row: 5, col: 4 },
+            { id: 'AE.TM', name: 'Tool Lifecycle Management', category: 'ae', row: 6, col: 4 },
+            { id: 'AE.MC', name: 'MCP Integration', category: 'ae', row: 7, col: 4 },
+            
+            // Interaction & Collaboration (green)
+            { id: 'IC.NL', name: 'Natural Language', category: 'ic', row: 1, col: 5 },
+            { id: 'IC.DM', name: 'Dialogue Management', category: 'ic', row: 2, col: 5 },
+            { id: 'IC.HL', name: 'Human-in-Loop', category: 'ic', row: 3, col: 5 },
+            { id: 'IC.AC', name: 'Agent Communication', category: 'ic', row: 4, col: 5 },
+            { id: 'IC.CL', name: 'Collaboration', category: 'ic', row: 5, col: 5 },
+            { id: 'IC.RB', name: 'Role Behavior', category: 'ic', row: 6, col: 5 },
+            { id: 'IC.CS', name: 'Consensus Protocols', category: 'ic', row: 1, col: 6 },
+            { id: 'IC.CF', name: 'Conflict Resolution', category: 'ic', row: 2, col: 6 },
+            { id: 'IC.SI', name: 'Industrial Integration', category: 'ic', row: 3, col: 6 },
+            { id: 'IC.ES', name: 'Enterprise Integration', category: 'ic', row: 4, col: 6 },
+            { id: 'IC.MB', name: 'Message Brokers', category: 'ic', row: 5, col: 6 },
+            { id: 'IC.DS', name: 'Distributed Coordination', category: 'ic', row: 6, col: 6 },
+            
+            // Governance & Safety (rose)
+            { id: 'GS.DL', name: 'Deployment Management', category: 'gs', row: 7, col: 1 },
+            { id: 'GS.MO', name: 'Monitoring', category: 'gs', row: 7, col: 2 },
+            { id: 'GS.EV', name: 'Evaluation', category: 'gs', row: 7, col: 3 },
+            { id: 'GS.SC', name: 'Scaling', category: 'gs', row: 8, col: 1 },
+            { id: 'GS.SF', name: 'Safety', category: 'gs', row: 8, col: 2 },
+            { id: 'GS.SE', name: 'Security', category: 'gs', row: 8, col: 3 },
+            { id: 'GS.EX', name: 'Explainability', category: 'gs', row: 8, col: 4 },
+            { id: 'GS.ET', name: 'Ethics', category: 'gs', row: 7, col: 5 },
+            { id: 'GS.PR', name: 'Privacy', category: 'gs', row: 7, col: 6 },
+            { id: 'GS.RL', name: 'Reliability', category: 'gs', row: 8, col: 5 },
+            { id: 'GS.TC', name: 'Trust Management', category: 'gs', row: 8, col: 6 }
+        ];
+
+        // Updated use case definitions with comprehensive capability requirements
+        const useCases = {
+            all: capabilities.map(c => c.id),
+            customer_service: [
+                // Core Interaction Capabilities
+                'IC.NL', 'IC.DM', 'IC.HL',
+                // Knowledge & Context
+                'PK.KB', 'PK.CX', 'PK.MF',
+                // Content & Response Generation
+                'AE.CX', 'AE.TL',
+                // Learning & Adaptation
+                'LA.MM', 'LA.RL', 'LA.SL',
+                // Decision Making
+                'CG.DC', 'CG.RS',
+                // Comprehensive Governance & Security
+                'GS.SE', 'GS.PR', 'GS.EX', 'GS.MO', 'GS.ET', 'GS.RL', 'GS.DL'
+            ],
+            industrial: [
+                // Industrial Integration
+                'IC.SI', 'IC.MB', 'IC.ES', 'IC.DS',
+                // Multi-Agent Coordination
+                'IC.CS', 'IC.CF', 'IC.AC', 'IC.CL',
+                // Environmental Sensing & Data
+                'PK.OB', 'PK.MF', 'PK.CX',
+                // Advanced Reasoning & Decision Making
+                'CG.DC', 'CG.RS', 'CG.PS', 'CG.PL',
+                // Learning & Optimization
+                'LA.SL', 'LA.AD', 'LA.MM', 'LA.VM',
+                // Task Execution
+                'AE.TX', 'AE.TL', 'AE.CG',
+                // Critical Governance & Safety
+                'GS.SF', 'GS.RL', 'GS.MO', 'GS.EV', 'GS.SE', 'GS.DL', 'GS.SC', 'GS.TC'
+            ],
+            research: [
+                // Knowledge & Information Processing
+                'PK.KB', 'PK.OB', 'PK.CX', 'PK.MF',
+                // Advanced Reasoning & Problem Solving
+                'CG.RS', 'CG.PS', 'CG.PL', 'CG.DC',
+                // Learning & Memory Management
+                'LA.MM', 'LA.SL', 'LA.VM', 'LA.MS', 'LA.AD',
+                // Content & Code Generation
+                'AE.CG', 'AE.CX', 'AE.TL', 'AE.TX',
+                // Collaboration & Communication
+                'IC.NL', 'IC.DM', 'IC.HL', 'IC.AC',
+                // Research Integrity & Quality
+                'GS.EX', 'GS.ET', 'GS.RL', 'GS.MO', 'GS.EV', 'GS.PR'
+            ],
+            workflow: [
+                // Planning & Orchestration
+                'CG.PL', 'CG.PS', 'CG.DC', 'CG.PA',
+                // Task Execution & Tool Management
+                'AE.TX', 'AE.TL', 'AE.TM', 'AE.MC',
+                // Agent Collaboration
+                'IC.AC', 'IC.CL', 'IC.RB', 'IC.ES',
+                // Learning & Adaptation
+                'LA.MM', 'LA.RL', 'LA.AD',
+                // Knowledge & Context
+                'PK.KB', 'PK.CX',
+                // Enterprise Governance
+                'GS.MO', 'GS.EV', 'GS.DL', 'GS.SE', 'GS.SC', 'GS.RL'
+            ]
+        };
+
+        let currentUseCase = 'all';
+
+        // Initialize the grid
+        function initializeGrid() {
+            const grid = document.getElementById('capabilityGrid');
+            
+            capabilities.forEach(capability => {
+                const block = document.createElement('div');
+                block.className = `capability-block ${capability.category}`;
+                block.style.gridColumn = capability.col;
+                block.style.gridRow = capability.row;
+                block.dataset.capabilityId = capability.id;
+                
+                block.innerHTML = `
+                    <div class="capability-id">${capability.id}</div>
+                    <div class="capability-name">${capability.name}</div>
+                `;
+                
+                grid.appendChild(block);
+            });
+        }
+
+        // Update visibility based on use case
+        function updateVisibility() {
+            const requiredCapabilities = useCases[currentUseCase];
+            
+            capabilities.forEach(capability => {
+                const block = document.querySelector(`[data-capability-id="${capability.id}"]`);
+                if (requiredCapabilities.includes(capability.id)) {
+                    block.classList.remove('hidden');
+                } else {
+                    block.classList.add('hidden');
+                }
+            });
+        }
+
+        // Handle use case button clicks
+        function setupEventListeners() {
+            const buttons = document.querySelectorAll('.use-case-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Update current use case
+                    currentUseCase = button.dataset.usecase;
+                    
+                    // Update visibility
+                    updateVisibility();
+                });
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeGrid();
+            updateVisibility();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>
