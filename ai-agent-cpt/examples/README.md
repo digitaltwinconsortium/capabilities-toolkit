@@ -4,7 +4,7 @@ This folder contains interactive tools, generators, and implementation examples 
 
 ## Available Tools and Examples
 
-### 🚀 **Interactive Generators**
+### **Interactive Generators**
 
 #### `advanced_ai_agent_cpt_generator/`
 Advanced capability generation tools for complex AI agent systems:
@@ -23,14 +23,14 @@ Simple implementation examples for getting started:
 - **`ai_agent_cpt.html`** - Basic web interface for capability exploration
 - **`base_cpt_generator_prompt.md`** - Fundamental prompts for beginners
 
-### 📊 **Level-Based Examples**
+### **Level-Based Examples**
 
 #### `ai_agent_level_examples_generator/`
 Tools for exploring different AI agent maturity levels:
 - **`aia_cpt_examples_complete.md`** - Complete examples across all maturity levels
 - **`level_examples_generator_prompt.md`** - Prompts for generating level-specific examples
 
-### 📓 **Jupyter Notebook Tools**
+### **Jupyter Notebook Tools**
 
 #### `ai_agent_jupyternotebook/`
 Interactive Python-based tools for advanced users:
@@ -40,7 +40,7 @@ Interactive Python-based tools for advanced users:
   - Data visualization tools
   - Integration with external systems
 
-### 🏭 **Real-World Use Cases**
+### **Real-World Use Cases**
 
 #### `main_usecase_cpt/`
 Production-ready examples from real implementations:
