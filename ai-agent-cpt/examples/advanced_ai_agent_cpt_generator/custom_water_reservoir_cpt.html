@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Reservoir Management - AI Agent CPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #003952 0%, #004f6b 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            color: #3498db;
+            font-size: 1.4em;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .view-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .view-btn.active {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(8, 100px);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .capability {
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            font-size: 0.85em;
+        }
+
+        .capability:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .capability.hidden {
+            opacity: 0.25;
+        }
+
+        .capability.selected {
+            opacity: 1;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
+        .capability.essential {
+            border-width: 3px;
+        }
+
+        .capability-code {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        .capability-name {
+            font-size: 0.75em;
+            line-height: 1.1;
+            font-weight: 500;
+        }
+
+        .priority-indicator {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .priority-high { background: #e74c3c; }
+        .priority-medium { background: #f39c12; }
+        .priority-low { background: #2ecc71; }
+
+        /* Category Colors */
+        .pk { background: #D1DCEA; border-color: #7A9BC4; color: #13386D; }
+        .cg { background: #FAEAD5; border-color: #D4A571; color: #945911; }
+        .la { background: #E3DDEC; border-color: #A18DB5; color: #4E3D6F; }
+        .ae { background: #EEEEEE; border-color: #999999; color: #404040; }
+        .ic { background: #D5E3E1; border-color: #7FA596; color: #295548; }
+        .gs { background: #EDD9D5; border-color: #C78275; color: #792D21; }
+
+        /* Grid Positioning */
+        .pos-1-1 { grid-column: 1; grid-row: 1; }
+        .pos-1-2 { grid-column: 2; grid-row: 1; }
+        .pos-1-3 { grid-column: 3; grid-row: 1; }
+        .pos-1-5 { grid-column: 5; grid-row: 1; }
+        .pos-1-6 { grid-column: 6; grid-row: 1; }
+        .pos-2-2 { grid-column: 2; grid-row: 2; }
+        .pos-2-3 { grid-column: 3; grid-row: 2; }
+        .pos-2-4 { grid-column: 4; grid-row: 2; }
+        .pos-2-5 { grid-column: 5; grid-row: 2; }
+        .pos-2-6 { grid-column: 6; grid-row: 2; }
+        .pos-3-1 { grid-column: 1; grid-row: 3; }
+        .pos-3-2 { grid-column: 2; grid-row: 3; }
+        .pos-3-3 { grid-column: 3; grid-row: 3; }
+        .pos-3-4 { grid-column: 4; grid-row: 3; }
+        .pos-3-5 { grid-column: 5; grid-row: 3; }
+        .pos-3-6 { grid-column: 6; grid-row: 3; }
+        .pos-4-1 { grid-column: 1; grid-row: 4; }
+        .pos-4-2 { grid-column: 2; grid-row: 4; }
+        .pos-4-3 { grid-column: 3; grid-row: 4; }
+        .pos-4-4 { grid-column: 4; grid-row: 4; }
+        .pos-4-5 { grid-column: 5; grid-row: 4; }
+        .pos-4-6 { grid-column: 6; grid-row: 4; }
+        .pos-5-1 { grid-column: 1; grid-row: 5; }
+        .pos-5-2 { grid-column: 2; grid-row: 5; }
+        .pos-5-3 { grid-column: 3; grid-row: 5; }
+        .pos-5-4 { grid-column: 4; grid-row: 5; }
+        .pos-5-5 { grid-column: 5; grid-row: 5; }
+        .pos-5-6 { grid-column: 6; grid-row: 5; }
+        .pos-6-1 { grid-column: 1; grid-row: 6; }
+        .pos-6-2 { grid-column: 2; grid-row: 6; }
+        .pos-6-3 { grid-column: 3; grid-row: 6; }
+        .pos-6-4 { grid-column: 4; grid-row: 6; }
+        .pos-6-5 { grid-column: 5; grid-row: 6; }
+        .pos-6-6 { grid-column: 6; grid-row: 6; }
+        .pos-7-1 { grid-column: 1; grid-row: 7; }
+        .pos-7-2 { grid-column: 2; grid-row: 7; }
+        .pos-7-3 { grid-column: 3; grid-row: 7; }
+        .pos-7-4 { grid-column: 4; grid-row: 7; }
+        .pos-7-5 { grid-column: 5; grid-row: 7; }
+        .pos-7-6 { grid-column: 6; grid-row: 7; }
+        .pos-8-1 { grid-column: 1; grid-row: 8; }
+        .pos-8-2 { grid-column: 2; grid-row: 8; }
+        .pos-8-3 { grid-column: 3; grid-row: 8; }
+        .pos-8-4 { grid-column: 4; grid-row: 8; }
+        .pos-8-5 { grid-column: 5; grid-row: 8; }
+        .pos-8-6 { grid-column: 6; grid-row: 8; }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+
+        .implementation-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .guide-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .guide-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .guide-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .guide-section li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .guide-section li:last-child {
+            border-bottom: none;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-link {
+            color: #003952;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .periodic-table {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+                padding: 15px;
+            }
+            
+            .capability {
+                font-size: 0.7em;
+                padding: 6px;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            .view-btn {
+                padding: 10px 18px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌊 Water Reservoir Management</h1>
+        <h2>AI Agent Capabilities Periodic Table - Water Utilities Implementation Guide</h2>
+        <p><strong>Level 4 Multi-Agent Systems</strong> | 32 Essential Capabilities for Autonomous Water Operations</p>
+    </div>
+
+    <div class="controls">
+        <button class="view-btn active" data-view="all">All Capabilities</button>
+        <button class="view-btn" data-view="reservoir">Reservoir Management</button>
+        <button class="view-btn" data-view="essential">Essential Only</button>
+        <button class="view-btn" data-view="advanced">Advanced Features</button>
+    </div>
+
+    <div class="container">
+        <div class="periodic-table">
+            <!-- Perception & Knowledge (PK) -->
+            <div class="capability pk pos-3-1 selected essential" data-code="PK.OB" data-priority="high">
+                <div class="capability-code">PK.OB</div>
+                <div class="capability-name">Environmental Sensing</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability pk pos-4-1 selected" data-code="PK.KB" data-priority="high">
+                <div class="capability-code">PK.KB</div>
+                <div class="capability-name">Knowledge Access</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability pk pos-5-1 selected essential" data-code="PK.CX" data-priority="high">
+                <div class="capability-code">PK.CX</div>
+                <div class="capability-name">Context & Memory</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability pk pos-6-1 selected" data-code="PK.MF" data-priority="high">
+                <div class="capability-code">PK.MF</div>
+                <div class="capability-name">Multi-Modal Fusion</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+
+            <!-- Cognition & Reasoning (CG) -->
+            <div class="capability cg pos-1-2 selected essential" data-code="CG.PL" data-priority="high">
+                <div class="capability-code">CG.PL</div>
+                <div class="capability-name">Planning & Decomposition</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-2-2 selected essential" data-code="CG.RS" data-priority="high">
+                <div class="capability-code">CG.RS</div>
+                <div class="capability-name">Reasoning</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-3-2 selected essential" data-code="CG.DC" data-priority="high">
+                <div class="capability-code">CG.DC</div>
+                <div class="capability-name">Decision Making</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-4-2 selected" data-code="CG.PS" data-priority="high">
+                <div class="capability-code">CG.PS</div>
+                <div class="capability-name">Problem Solving</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-5-2 selected" data-code="CG.PP" data-priority="medium">
+                <div class="capability-code">CG.PP</div>
+                <div class="capability-name">Formal Planning</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability cg pos-6-2 selected" data-code="CG.PA" data-priority="medium">
+                <div class="capability-code">CG.PA</div>
+                <div class="capability-name">Plan Adaptation</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+
+            <!-- Learning & Adaptation (LA) -->
+            <div class="capability la pos-1-3 selected essential" data-code="LA.MM" data-priority="high">
+                <div class="capability-code">LA.MM</div>
+                <div class="capability-name">Memory Management</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability la pos-2-3 selected" data-code="LA.RL" data-priority="medium">
+                <div class="capability-code">LA.RL</div>
+                <div class="capability-name">Reinforcement Learning</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability la pos-3-3 selected" data-code="LA.AD" data-priority="medium">
+                <div class="capability-code">LA.AD</div>
+                <div class="capability-name">Self-Optimization</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability la pos-4-3 selected essential" data-code="LA.SL" data-priority="high">
+                <div class="capability-code">LA.SL</div>
+                <div class="capability-name">Supervised Learning</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability la pos-5-3 selected" data-code="LA.VM" data-priority="medium">
+                <div class="capability-code">LA.VM</div>
+                <div class="capability-name">Vector Memory</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability la pos-6-3" data-code="LA.MS" data-priority="low">
+                <div class="capability-code">LA.MS</div>
+                <div class="capability-name">Memory Scoring</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+
+            <!-- Action & Execution (AE) -->
+            <div class="capability ae pos-2-4 selected essential" data-code="AE.TX" data-priority="high">
+                <div class="capability-code">AE.TX</div>
+                <div class="capability-name">Task Execution</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ae pos-3-4 selected essential" data-code="AE.TL" data-priority="high">
+                <div class="capability-code">AE.TL</div>
+                <div class="capability-name">Tool Usage & API</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ae pos-4-4" data-code="AE.CG" data-priority="low">
+                <div class="capability-code">AE.CG</div>
+                <div class="capability-name">Code Generation</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ae pos-5-4" data-code="AE.CX" data-priority="medium">
+                <div class="capability-code">AE.CX</div>
+                <div class="capability-name">Content Creation</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ae pos-6-4" data-code="AE.TM" data-priority="medium">
+                <div class="capability-code">AE.TM</div>
+                <div class="capability-name">Tool Lifecycle</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ae pos-7-4 selected" data-code="AE.MC" data-priority="high">
+                <div class="capability-code">AE.MC</div>
+                <div class="capability-name">MCP Integration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+
+            <!-- Interaction & Collaboration (IC) -->
+            <div class="capability ic pos-1-5 selected" data-code="IC.NL" data-priority="medium">
+                <div class="capability-code">IC.NL</div>
+                <div class="capability-name">Natural Language</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-2-5 selected" data-code="IC.DM" data-priority="medium">
+                <div class="capability-code">IC.DM</div>
+                <div class="capability-name">Dialogue Management</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-3-5 selected essential" data-code="IC.HL" data-priority="high">
+                <div class="capability-code">IC.HL</div>
+                <div class="capability-name">Human-in-Loop</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-4-5 selected essential" data-code="IC.AC" data-priority="high">
+                <div class="capability-code">IC.AC</div>
+                <div class="capability-name">Agent Communication</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-5-5 selected essential" data-code="IC.CL" data-priority="high">
+                <div class="capability-code">IC.CL</div>
+                <div class="capability-name">Collaboration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-6-5" data-code="IC.RB" data-priority="medium">
+                <div class="capability-code">IC.RB</div>
+                <div class="capability-name">Role Behavior</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-1-6 selected" data-code="IC.CS" data-priority="high">
+                <div class="capability-code">IC.CS</div>
+                <div class="capability-name">Consensus Protocols</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-2-6 selected" data-code="IC.CF" data-priority="high">
+                <div class="capability-code">IC.CF</div>
+                <div class="capability-name">Conflict Resolution</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-3-6 selected essential" data-code="IC.SI" data-priority="high">
+                <div class="capability-code">IC.SI</div>
+                <div class="capability-name">Industrial Integration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-4-6 selected" data-code="IC.ES" data-priority="high">
+                <div class="capability-code">IC.ES</div>
+                <div class="capability-name">Enterprise Integration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-5-6 selected" data-code="IC.MB" data-priority="high">
+                <div class="capability-code">IC.MB</div>
+                <div class="capability-name">Message Brokers</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-6-6 selected" data-code="IC.DS" data-priority="high">
+                <div class="capability-code">IC.DS</div>
+                <div class="capability-name">Distributed Coordination</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+
+            <!-- Governance & Safety (GS) -->
+            <div class="capability gs pos-7-1" data-code="GS.DL" data-priority="medium">
+                <div class="capability-code">GS.DL</div>
+                <div class="capability-name">Deployment Management</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability gs pos-7-2 selected essential" data-code="GS.MO" data-priority="high">
+                <div class="capability-code">GS.MO</div>
+                <div class="capability-name">Monitoring</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-7-3 selected" data-code="GS.EV" data-priority="high">
+                <div class="capability-code">GS.EV</div>
+                <div class="capability-name">Evaluation</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-7-5" data-code="GS.ET" data-priority="medium">
+                <div class="capability-code">GS.ET</div>
+                <div class="capability-name">Ethics</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability gs pos-7-6" data-code="GS.PR" data-priority="medium">
+                <div class="capability-code">GS.PR</div>
+                <div class="capability-name">Privacy</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability gs pos-8-1" data-code="GS.SC" data-priority="low">
+                <div class="capability-code">GS.SC</div>
+                <div class="capability-name">Scaling</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-8-2 selected essential" data-code="GS.SF" data-priority="high">
+                <div class="capability-code">GS.SF</div>
+                <div class="capability-name">Safety</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-3 selected essential" data-code="GS.SE" data-priority="high">
+                <div class="capability-code">GS.SE</div>
+                <div class="capability-name">Security</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-4 selected" data-code="GS.EX" data-priority="high">
+                <div class="capability-code">GS.EX</div>
+                <div class="capability-name">Explainability</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-5 selected essential" data-code="GS.RL" data-priority="high">
+                <div class="capability-code">GS.RL</div>
+                <div class="capability-name">Reliability</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-6 selected" data-code="GS.TC" data-priority="high">
+                <div class="capability-code">GS.TC</div>
+                <div class="capability-name">Trust Management</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>🎯 Implementation Guidance for Water Reservoir Management</h3>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color pk"></div>
+                    <span><strong>PK:</strong> Perception & Knowledge - Sensor Integration & Data Access</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color cg"></div>
+                    <span><strong>CG:</strong> Cognition & Reasoning - Decision Making & Planning</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color la"></div>
+                    <span><strong>LA:</strong> Learning & Adaptation - Predictive Analytics</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ae"></div>
+                    <span><strong>AE:</strong> Action & Execution - System Control & Integration</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ic"></div>
+                    <span><strong>IC:</strong> Interaction & Collaboration - Multi-Agent Coordination</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color gs"></div>
+                    <span><strong>GS:</strong> Governance & Safety - Compliance & Risk Management</span>
+                </div>
+            </div>
+
+            <div class="implementation-guide">
+                <div class="guide-section">
+                    <h4>🚨 Critical Safety Systems (Essential)</h4>
+                    <ul>
+                        <li><strong>GS.SF:</strong> Maintain minimum water levels, prevent overflow</li>
+                        <li><strong>GS.SE:</strong> Secure SCADA systems against cyber threats</li>
+                        <li><strong>GS.RL:</strong> 99.9% uptime for critical water supply</li>
+                        <li><strong>IC.HL:</strong> Human operator oversight for critical decisions</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>🤖 Multi-Agent Architecture (Level 4)</h4>
+                    <ul>
+                        <li><strong>IC.AC:</strong> Agent-to-agent communication protocols</li>
+                        <li><strong>IC.CL:</strong> Collaborative decision making</li>
+                        <li><strong>IC.CS:</strong> Consensus for conflicting priorities</li>
+                        <li><strong>IC.CF:</strong> Resolve cost vs. safety conflicts</li>
+                        <li><strong>IC.DS:</strong> Distributed coordination across systems</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>📊 Data Integration & Sensing</h4>
+                    <ul>
+                        <li><strong>PK.OB:</strong> SCADA sensors, flow meters, equipment monitoring</li>
+                        <li><strong>PK.MF:</strong> Fuse electricity prices, weather, demand data</li>
+                        <li><strong>IC.SI:</strong> Industrial SCADA system integration</li>
+                        <li><strong>IC.ES:</strong> Enterprise utility management systems</li>
+                        <li><strong>IC.MB:</strong> Real-time data streaming</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>🧠 Intelligent Decision Making</h4>
+                    <ul>
+                        <li><strong>CG.DC:</strong> Balance cost, safety, and maintenance</li>
+                        <li><strong>CG.RS:</strong> Multi-criteria reasoning for pump activation</li>
+                        <li><strong>CG.PL:</strong> Daily and weekly operation planning</li>
+                        <li><strong>LA.SL:</strong> Predictive maintenance models</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>⚡ System Control & Execution</h4>
+                    <ul>
+                        <li><strong>AE.TX:</strong> Automated pump control execution</li>
+                        <li><strong>AE.TL:</strong> API integration with electricity providers</li>
+                        <li><strong>AE.MC:</strong> Multi-component system coordination</li>
+                        <li><strong>GS.MO:</strong> Continuous system monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h4>📈 Key Performance Indicators</h4>
+                    <ul>
+                        <li><strong>Water Level Compliance:</strong> >99% time above minimum</li>
+                        <li><strong>Cost Optimization:</strong> >70% pumping during low-cost periods</li>
+                        <li><strong>Equipment Reliability:</strong> 30% reduction in failures</li>
+                        <li><strong>Maintenance Adherence:</strong> >95% scheduled completion</li>
+                        <li><strong>System Availability:</strong> >99.9% uptime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Powered by <a href="https://www.xmpro.com" target="_blank" class="footer-link">XMPro</a> - Intelligent Digital Twin Platform for Industrial Operations</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Capability sets for different views
+        const capabilitySets = {
+            all: ['all'],
+            reservoir: [
+                'PK.OB', 'PK.KB', 'PK.CX', 'PK.MF',
+                'CG.PL', 'CG.RS', 'CG.DC', 'CG.PS', 'CG.PP', 'CG.PA',
+                'LA.MM', 'LA.RL', 'LA.AD', 'LA.SL', 'LA.VM',
+                'AE.TX', 'AE.TL', 'AE.MC',
+                'IC.NL', 'IC.DM', 'IC.HL', 'IC.AC', 'IC.CL', 'IC.CS', 'IC.CF', 'IC.SI', 'IC.ES', 'IC.MB', 'IC.DS',
+                'GS.MO', 'GS.EV', 'GS.SF', 'GS.SE', 'GS.EX', 'GS.RL', 'GS.TC'
+            ],
+            essential: [
+                'PK.OB', 'PK.CX',
+                'CG.PL', 'CG.RS', 'CG.DC',
+                'LA.MM', 'LA.SL',
+                'AE.TX', 'AE.TL',
+                'IC.HL', 'IC.AC', 'IC.CL', 'IC.SI',
+                'GS.MO', 'GS.SF', 'GS.SE', 'GS.RL'
+            ],
+            advanced: [
+                'PK.KB', 'PK.MF',
+                'CG.PS', 'CG.PP', 'CG.PA',
+                'LA.RL', 'LA.AD', 'LA.VM',
+                'AE.MC',
+                'IC.NL', 'IC.DM', 'IC.CS', 'IC.CF', 'IC.ES', 'IC.MB', 'IC.DS',
+                'GS.EV', 'GS.EX', 'GS.TC'
+            ]
+        };
+
+        // Initialize view
+        function updateView(selectedView) {
+            const capabilities = document.querySelectorAll('.capability');
+            const activeSet = capabilitySets[selectedView];
+            
+            capabilities.forEach(cap => {
+                const code = cap.dataset.code;
+                if (selectedView === 'all' || activeSet.includes(code)) {
+                    cap.classList.remove('hidden');
+                    cap.classList.add('selected');
+                } else {
+                    cap.classList.add('hidden');
+                    cap.classList.remove('selected');
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-view="${selectedView}"]`).classList.add('active');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const view = e.target.dataset.view;
+                updateView(view);
+            });
+        });
+
+        // Capability hover effects
+        document.querySelectorAll('.capability').forEach(cap => {
+            cap.addEventListener('click', () => {
+                const code = cap.dataset.code;
+                const priority = cap.dataset.priority;
+                const descriptions = {
+                    'PK.OB': 'Integrates SCADA sensors, flow meters, and equipment monitoring for real-time reservoir and infrastructure sensing.',
+                    'PK.KB': 'Accesses historical maintenance records, regulatory requirements, and operational knowledge bases.',
+                    'PK.CX': 'Maintains operational context including current system state, weather conditions, and demand patterns.',
+                    'PK.MF': 'Fuses data from multiple sources: SCADA, electricity APIs, weather forecasts, and demand predictions.',
+                    'CG.PL': 'Develops daily and weekly operational plans balancing cost, safety, and maintenance requirements.',
+                    'CG.RS': 'Applies multi-criteria reasoning to balance competing priorities in pump activation decisions.',
+                    'CG.DC': 'Makes real-time decisions about pump operations considering safety, cost, and equipment status.',
+                    'CG.PS': 'Solves complex optimization problems for cost-effective reservoir management.',
+                    'LA.MM': 'Manages operational memory including patterns, exceptions, and system performance history.',
+                    'LA.SL': 'Learns from historical data to predict equipment failures and optimize maintenance scheduling.',
+                    'AE.TX': 'Executes pump control commands and maintenance scheduling in coordination with human operators.',
+                    'AE.TL': 'Integrates with SCADA systems, electricity provider APIs, and maintenance management tools.',
+                    'IC.HL': 'Maintains human operator oversight for critical decisions and emergency situations.',
+                    'IC.AC': 'Enables communication between specialized agents (pump control, maintenance, cost optimization).',
+                    'IC.CL': 'Coordinates collaborative decision-making across multiple agent specializations.',
+                    'IC.SI': 'Integrates with industrial SCADA and control systems for seamless operations.',
+                    'GS.SF': 'Ensures water safety levels are maintained above regulatory minimums at all times.',
+                    'GS.SE': 'Protects critical infrastructure through cybersecurity protocols and access controls.',
+                    'GS.RL': 'Maintains 99.9%+ system availability for continuous water supply operations.'
+                };
+                
+                alert(`${code}: ${descriptions[code] || 'Essential capability for water reservoir management.'}\n\nPriority: ${priority.toUpperCase()}`);
+            });
+        });
+
+        // Initialize with reservoir view
+        updateView('reservoir');
+    </script>
+</body>
+</html>

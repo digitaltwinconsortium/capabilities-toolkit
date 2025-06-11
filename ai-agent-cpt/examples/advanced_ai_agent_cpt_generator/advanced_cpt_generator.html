@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTC AI Agent Capabilities Periodic Table v1.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1d4ed8 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            overflow-x: auto;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #e5e7eb;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .info-bar {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: inline-block;
+            color: #f3f4f6;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .controls-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .control-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .control-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1f2937;
+            text-align: center;
+        }
+
+        .industry-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .industry-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            color: #374151;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .industry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .industry-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border-color: #60a5fa;
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .maturity-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .maturity-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            color: #374151;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #e5e7eb;
+            text-align: left;
+            position: relative;
+        }
+
+        .maturity-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .maturity-btn.active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border-color: #a78bfa;
+            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .progression-indicator {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .statistics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #94a3b8;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .periodic-table {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(8, auto);
+            gap: 8px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .capability {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .capability:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .capability.active {
+            animation: selectedPulse 2s infinite;
+            border-width: 3px;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .capability.inactive {
+            opacity: 0.25;
+            filter: grayscale(100%);
+            transform: scale(0.95);
+        }
+
+        @keyframes selectedPulse {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+                border-color: #3b82f6;
+            }
+            50% { 
+                box-shadow: 0 0 35px rgba(59, 130, 246, 0.8);
+                border-color: #1d4ed8;
+            }
+        }
+
+        .capability-code {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #6b7280;
+        }
+
+        .capability-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #1f2937;
+        }
+
+        /* Category-specific styling */
+        .capability.PK {
+            background: linear-gradient(135deg, #D1DCEA, #E6F0FF);
+            border-color: #7A9BC4;
+            color: #13386D;
+        }
+
+        .capability.CG {
+            background: linear-gradient(135deg, #FAEAD5, #FFF5E6);
+            border-color: #D4A571;
+            color: #945911;
+        }
+
+        .capability.LA {
+            background: linear-gradient(135deg, #E3DDEC, #F0E6FF);
+            border-color: #A18DB5;
+            color: #4E3D6F;
+        }
+
+        .capability.AE {
+            background: linear-gradient(135deg, #EEEEEE, #F8F8F8);
+            border-color: #999999;
+            color: #404040;
+        }
+
+        .capability.IC {
+            background: linear-gradient(135deg, #D5E3E1, #E6F7F1);
+            border-color: #7FA596;
+            color: #295548;
+        }
+
+        .capability.GS {
+            background: linear-gradient(135deg, #EDD9D5, #F7E6E1);
+            border-color: #C78275;
+            color: #792D21;
+        }
+
+        /* Grid positioning */
+        .capability[data-id="PK.OB"] { grid-column: 1; grid-row: 3; }
+        .capability[data-id="PK.KB"] { grid-column: 1; grid-row: 4; }
+        .capability[data-id="PK.CX"] { grid-column: 1; grid-row: 5; }
+        .capability[data-id="PK.MF"] { grid-column: 1; grid-row: 6; }
+
+        .capability[data-id="CG.PL"] { grid-column: 2; grid-row: 1; }
+        .capability[data-id="CG.RS"] { grid-column: 2; grid-row: 2; }
+        .capability[data-id="CG.DC"] { grid-column: 2; grid-row: 3; }
+        .capability[data-id="CG.PS"] { grid-column: 2; grid-row: 4; }
+        .capability[data-id="CG.PP"] { grid-column: 2; grid-row: 5; }
+        .capability[data-id="CG.PA"] { grid-column: 2; grid-row: 6; }
+
+        .capability[data-id="LA.MM"] { grid-column: 3; grid-row: 1; }
+        .capability[data-id="LA.RL"] { grid-column: 3; grid-row: 2; }
+        .capability[data-id="LA.AD"] { grid-column: 3; grid-row: 3; }
+        .capability[data-id="LA.SL"] { grid-column: 3; grid-row: 4; }
+        .capability[data-id="LA.VM"] { grid-column: 3; grid-row: 5; }
+        .capability[data-id="LA.MS"] { grid-column: 3; grid-row: 6; }
+
+        .capability[data-id="AE.TX"] { grid-column: 4; grid-row: 2; }
+        .capability[data-id="AE.TL"] { grid-column: 4; grid-row: 3; }
+        .capability[data-id="AE.CG"] { grid-column: 4; grid-row: 4; }
+        .capability[data-id="AE.CX"] { grid-column: 4; grid-row: 5; }
+        .capability[data-id="AE.TM"] { grid-column: 4; grid-row: 6; }
+        .capability[data-id="AE.MC"] { grid-column: 4; grid-row: 7; }
+
+        .capability[data-id="IC.NL"] { grid-column: 5; grid-row: 1; }
+        .capability[data-id="IC.DM"] { grid-column: 5; grid-row: 2; }
+        .capability[data-id="IC.HL"] { grid-column: 5; grid-row: 3; }
+        .capability[data-id="IC.AC"] { grid-column: 5; grid-row: 4; }
+        .capability[data-id="IC.CL"] { grid-column: 5; grid-row: 5; }
+        .capability[data-id="IC.RB"] { grid-column: 5; grid-row: 6; }
+
+        .capability[data-id="IC.CS"] { grid-column: 6; grid-row: 1; }
+        .capability[data-id="IC.CF"] { grid-column: 6; grid-row: 2; }
+        .capability[data-id="IC.SI"] { grid-column: 6; grid-row: 3; }
+        .capability[data-id="IC.ES"] { grid-column: 6; grid-row: 4; }
+        .capability[data-id="IC.MB"] { grid-column: 6; grid-row: 5; }
+        .capability[data-id="IC.DS"] { grid-column: 6; grid-row: 6; }
+
+        .capability[data-id="GS.DL"] { grid-column: 1; grid-row: 7; }
+        .capability[data-id="GS.MO"] { grid-column: 2; grid-row: 7; }
+        .capability[data-id="GS.EV"] { grid-column: 3; grid-row: 7; }
+        .capability[data-id="GS.ET"] { grid-column: 5; grid-row: 7; }
+        .capability[data-id="GS.PR"] { grid-column: 6; grid-row: 7; }
+
+        .capability[data-id="GS.SC"] { grid-column: 1; grid-row: 8; }
+        .capability[data-id="GS.SF"] { grid-column: 2; grid-row: 8; }
+        .capability[data-id="GS.SE"] { grid-column: 3; grid-row: 8; }
+        .capability[data-id="GS.EX"] { grid-column: 4; grid-row: 8; }
+        .capability[data-id="GS.RL"] { grid-column: 5; grid-row: 8; }
+        .capability[data-id="GS.TC"] { grid-column: 6; grid-row: 8; }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            max-width: 300px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .legend {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .legend-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .legend-item {
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .legend-item.PK {
+            background: linear-gradient(135deg, #D1DCEA, #E6F0FF);
+            border-color: #7A9BC4;
+            color: #13386D;
+        }
+
+        .legend-item.CG {
+            background: linear-gradient(135deg, #FAEAD5, #FFF5E6);
+            border-color: #D4A571;
+            color: #945911;
+        }
+
+        .legend-item.LA {
+            background: linear-gradient(135deg, #E3DDEC, #F0E6FF);
+            border-color: #A18DB5;
+            color: #4E3D6F;
+        }
+
+        .legend-item.AE {
+            background: linear-gradient(135deg, #EEEEEE, #F8F8F8);
+            border-color: #999999;
+            color: #404040;
+        }
+
+        .legend-item.IC {
+            background: linear-gradient(135deg, #D5E3E1, #E6F7F1);
+            border-color: #7FA596;
+            color: #295548;
+        }
+
+        .legend-item.GS {
+            background: linear-gradient(135deg, #EDD9D5, #F7E6E1);
+            border-color: #C78275;
+            color: #792D21;
+        }
+
+        .legend-category {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .legend-description {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 1200px) {
+            .controls-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            
+            .capability {
+                padding: 10px;
+                min-height: 80px;
+            }
+            
+            .capability-name {
+                font-size: 0.8rem;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">DTC AI Agent Capabilities Periodic Table v1.0</h1>
+            <p class="subtitle">Interactive Framework - Digital Twin Consortium</p>
+            <div class="info-bar">
+                💡 Pro Tip: Click industry use cases or maturity levels to filter capabilities. Hover for detailed descriptions.
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="control-panel">
+                <h3 class="control-title">Industry Use Cases</h3>
+                <div class="industry-buttons">
+                    <button class="industry-btn active" data-industry="all">All Capabilities</button>
+                    <button class="industry-btn" data-industry="manufacturing">Smart Manufacturing</button>
+                    <button class="industry-btn" data-industry="energy">Renewable Energy</button>
+                    <button class="industry-btn" data-industry="cities">Smart Cities</button>
+                    <button class="industry-btn" data-industry="healthcare">Healthcare Systems</button>
+                    <button class="industry-btn" data-industry="process">Process Industries</button>
+                    <button class="industry-btn" data-industry="transportation">Transportation</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3 class="control-title">Maturity Levels</h3>
+                <div class="maturity-levels">
+                    <button class="maturity-btn" data-level="L1">L1 - Conversational Agents</button>
+                    <button class="maturity-btn" data-level="L2">L2 - Procedural Workflow</button>
+                    <button class="maturity-btn" data-level="L3">L3 - Cognitive Autonomous</button>
+                    <button class="maturity-btn" data-level="L4">L4 - Multi-Agent Systems</button>
+                </div>
+                <div class="progression-indicator">
+                    <div class="progress-dot" data-level="L1"></div>
+                    <div class="progress-dot" data-level="L2"></div>
+                    <div class="progress-dot" data-level="L3"></div>
+                    <div class="progress-dot" data-level="L4"></div>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3 class="control-title">Statistics</h3>
+                <div class="statistics-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="active-capabilities">45</div>
+                        <div class="stat-label">Active Capabilities</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="categories-used">6</div>
+                        <div class="stat-label">Categories Used</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="complexity-percent">100%</div>
+                        <div class="stat-label">Complexity %</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="maturity-level">All</div>
+                        <div class="stat-label">Maturity Level</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="periodic-table">
+            <div class="grid-container" id="periodic-grid">
+                <!-- Capabilities will be dynamically generated -->
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3 class="legend-title">Category Legend</h3>
+            <div class="legend-grid">
+                <div class="legend-item PK">
+                    <div class="legend-category">PK - Perception & Knowledge</div>
+                    <div class="legend-description">Environmental sensing, knowledge access, context understanding, and multi-modal data fusion capabilities.</div>
+                </div>
+                <div class="legend-item CG">
+                    <div class="legend-category">CG - Cognition & Reasoning</div>
+                    <div class="legend-description">Planning, reasoning, decision making, problem solving, and cognitive processing capabilities.</div>
+                </div>
+                <div class="legend-item LA">
+                    <div class="legend-category">LA - Learning & Adaptation</div>
+                    <div class="legend-description">Memory management, reinforcement learning, self-optimization, and adaptive learning capabilities.</div>
+                </div>
+                <div class="legend-item AE">
+                    <div class="legend-category">AE - Action & Execution</div>
+                    <div class="legend-description">Task execution, tool usage, code generation, content creation, and implementation capabilities.</div>
+                </div>
+                <div class="legend-item IC">
+                    <div class="legend-category">IC - Interaction & Collaboration</div>
+                    <div class="legend-description">Natural language processing, dialogue management, human-AI collaboration, and multi-agent coordination.</div>
+                </div>
+                <div class="legend-item GS">
+                    <div class="legend-category">GS - Governance & Safety</div>
+                    <div class="legend-description">Deployment management, monitoring, evaluation, ethics, privacy, security, and reliability assurance.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // Capability definitions with enhanced descriptions
+        const capabilities = {
+            // Perception & Knowledge (PK)
+            'PK.OB': { name: 'Environmental Sensing', description: 'Real-time monitoring and analysis of physical and digital environments through sensors and IoT integration.' },
+            'PK.KB': { name: 'Knowledge Access', description: 'Access to structured knowledge bases, databases, and information repositories for informed decision making.' },
+            'PK.CX': { name: 'Context & Memory', description: 'Understanding and maintaining context across interactions with persistent memory capabilities.' },
+            'PK.MF': { name: 'Multi-Modal Fusion', description: 'Integration and correlation of data from multiple sources and modalities for comprehensive understanding.' },
+
+            // Cognition & Reasoning (CG)
+            'CG.PL': { name: 'Planning & Decomposition', description: 'Breaking down complex tasks into manageable steps and creating execution plans.' },
+            'CG.RS': { name: 'Reasoning', description: 'Logical inference, causal reasoning, and analytical thinking capabilities for problem analysis.' },
+            'CG.DC': { name: 'Decision Making', description: 'Systematic evaluation of options and selection of optimal courses of action.' },
+            'CG.PS': { name: 'Problem Solving', description: 'Identification, analysis, and resolution of complex problems using structured approaches.' },
+            'CG.PP': { name: 'Formal Planning', description: 'Advanced planning algorithms and formal methods for complex multi-step scenarios.' },
+            'CG.PA': { name: 'Plan Adaptation', description: 'Dynamic modification and adjustment of plans based on changing conditions and feedback.' },
+
+            // Learning & Adaptation (LA)
+            'LA.MM': { name: 'Memory Management', description: 'Efficient storage, retrieval, and organization of experiences and learned information.' },
+            'LA.RL': { name: 'Reinforcement Learning', description: 'Learning optimal behaviors through interaction with environment and reward feedback.' },
+            'LA.AD': { name: 'Self-Optimization', description: 'Continuous improvement of performance through self-analysis and adaptation mechanisms.' },
+            'LA.SL': { name: 'Supervised Learning', description: 'Learning from labeled examples and training data to improve task performance.' },
+            'LA.VM': { name: 'Vector Memory', description: 'Advanced semantic memory using vector embeddings for similarity and retrieval operations.' },
+            'LA.MS': { name: 'Memory Scoring', description: 'Intelligent prioritization and scoring of memories for optimal retention and recall.' },
+
+            // Action & Execution (AE)
+            'AE.TX': { name: 'Task Execution & Implementation', description: 'Systematic execution of planned tasks with monitoring and quality control.' },
+            'AE.TL': { name: 'Tool Usage & API Integration', description: 'Integration with external tools, APIs, and services for enhanced functionality.' },
+            'AE.CG': { name: 'Code Generation & Execution', description: 'Automated generation and execution of code for dynamic problem solving.' },
+            'AE.CX': { name: 'Content Creation & Generation', description: 'Generation of text, documents, reports, and other content based on requirements.' },
+            'AE.TM': { name: 'Tool Lifecycle Management', description: 'Management of tool deployment, updates, versioning, and maintenance cycles.' },
+            'AE.MC': { name: 'MCP Integration', description: 'Model Context Protocol integration for standardized tool and resource access.' },
+
+            // Interaction & Collaboration (IC)
+            'IC.NL': { name: 'Natural Language', description: 'Advanced natural language understanding and generation for human-AI communication.' },
+            'IC.DM': { name: 'Dialogue Management', description: 'Managing conversation flow, context, and state across multi-turn interactions.' },
+            'IC.HL': { name: 'Human-in-Loop', description: 'Seamless integration of human oversight and decision making in AI processes.' },
+            'IC.AC': { name: 'Agent Communication', description: 'Structured communication protocols and message passing between AI agents.' },
+            'IC.CL': { name: 'Collaboration', description: 'Coordinated teamwork capabilities for multi-agent and human-AI collaboration.' },
+            'IC.RB': { name: 'Role Behavior', description: 'Adaptive role-based behavior and persona management for different contexts.' },
+            'IC.CS': { name: 'Consensus Protocols', description: 'Distributed consensus mechanisms for multi-agent decision making and coordination.' },
+            'IC.CF': { name: 'Conflict Resolution', description: 'Automated detection and resolution of conflicts in multi-agent environments.' },
+            'IC.SI': { name: 'Industrial Integration', description: 'Integration with industrial systems, SCADA, PLCs, and manufacturing infrastructure.' },
+            'IC.ES': { name: 'Enterprise Integration', description: 'Seamless integration with enterprise systems, ERP, CRM, and business platforms.' },
+            'IC.MB': { name: 'Message Brokers', description: 'Asynchronous messaging and event-driven communication through message broker systems.' },
+            'IC.DS': { name: 'Distributed Coordination', description: 'Coordination mechanisms for distributed systems and geographically dispersed agents.' },
+
+            // Governance & Safety (GS)
+            'GS.DL': { name: 'Deployment Management', description: 'Systematic deployment, scaling, and lifecycle management of AI agent systems.' },
+            'GS.MO': { name: 'Monitoring', description: 'Comprehensive monitoring of system performance, health, and operational metrics.' },
+            'GS.EV': { name: 'Evaluation', description: 'Systematic evaluation and assessment of AI system performance and capabilities.' },
+            'GS.ET': { name: 'Ethics', description: 'Ethical decision making frameworks and moral reasoning capabilities.' },
+            'GS.PR': { name: 'Privacy', description: 'Data privacy protection, anonymization, and compliance with privacy regulations.' },
+            'GS.SC': { name: 'Scaling', description: 'Horizontal and vertical scaling capabilities for handling increased workloads.' },
+            'GS.SF': { name: 'Safety', description: 'Safety mechanisms, fail-safes, and risk mitigation for operational reliability.' },
+            'GS.SE': { name: 'Security', description: 'Cybersecurity measures, authentication, authorization, and threat protection.' },
+            'GS.EX': { name: 'Explainability', description: 'Transparent decision making with clear explanations and reasoning traces.' },
+            'GS.RL': { name: 'Reliability', description: 'High availability, fault tolerance, and consistent performance under various conditions.' },
+            'GS.TC': { name: 'Trust Management', description: 'Trust establishment, verification, and reputation management in multi-agent systems.' }
+        };
+
+        // Industry use case definitions
+        const industryUseCases = {
+            all: Object.keys(capabilities),
+            manufacturing: ['IC.SI', 'IC.MB', 'IC.ES', 'IC.DS', 'IC.CS', 'IC.CF', 'IC.AC', 'IC.CL', 'PK.OB', 'PK.MF', 'PK.CX', 'PK.KB', 'CG.DC', 'CG.RS', 'CG.PS', 'CG.PL', 'LA.SL', 'LA.AD', 'LA.MM', 'LA.VM', 'AE.TX', 'AE.TL', 'AE.CG', 'GS.SF', 'GS.RL', 'GS.MO', 'GS.EV', 'GS.SE'],
+            energy: ['PK.OB', 'PK.MF', 'PK.CX', 'PK.KB', 'CG.DC', 'CG.RS', 'CG.PL', 'CG.PS', 'IC.SI', 'IC.ES', 'IC.MB', 'IC.DS', 'LA.SL', 'LA.AD', 'LA.MM', 'AE.TX', 'AE.TL', 'GS.SF', 'GS.RL', 'GS.MO', 'GS.SE'],
+            cities: ['IC.NL', 'IC.DM', 'IC.ES', 'IC.MB', 'PK.OB', 'PK.MF', 'PK.CX', 'PK.KB', 'CG.PL', 'CG.DC', 'CG.RS', 'CG.PS', 'LA.SL', 'LA.AD', 'LA.MM', 'AE.TX', 'AE.TL', 'GS.SF', 'GS.ET', 'GS.PR', 'GS.MO', 'GS.RL'],
+            healthcare: ['IC.NL', 'IC.DM', 'IC.HL', 'PK.KB', 'PK.CX', 'PK.MF', 'CG.RS', 'CG.DC', 'CG.PS', 'LA.SL', 'LA.MM', 'LA.AD', 'AE.CX', 'AE.TX', 'GS.SF', 'GS.PR', 'GS.ET', 'GS.EX', 'GS.RL', 'GS.SE'],
+            process: ['IC.SI', 'IC.MB', 'IC.ES', 'PK.OB', 'PK.MF', 'PK.CX', 'CG.DC', 'CG.RS', 'CG.PL', 'LA.SL', 'LA.AD', 'LA.VM', 'AE.TX', 'AE.TL', 'GS.SF', 'GS.RL', 'GS.MO', 'GS.SE', 'GS.EV'],
+            transportation: ['IC.NL', 'IC.ES', 'IC.MB', 'CG.PL', 'CG.DC', 'CG.PS', 'PK.OB', 'PK.CX', 'PK.KB', 'LA.SL', 'LA.AD', 'LA.MM', 'AE.TX', 'AE.TL', 'IC.CL', 'GS.MO', 'GS.RL', 'GS.SE', 'GS.EV']
+        };
+
+        // Maturity level definitions
+        const maturityLevels = {
+            L1: ['IC.NL', 'IC.DM', 'PK.KB', 'PK.CX', 'AE.CX', 'GS.SE', 'GS.PR'],
+            L2: ['CG.PL', 'AE.TX', 'AE.TL', 'IC.AC', 'IC.CL', 'IC.RB', 'GS.MO', 'IC.ES'],
+            L3: ['CG.RS', 'CG.PS', 'CG.DC', 'LA.MM', 'LA.AD', 'PK.OB', 'AE.CG', 'GS.EX', 'LA.SL', 'LA.VM'],
+            L4: ['IC.CS', 'IC.CF', 'IC.DS', 'IC.SI', 'IC.MB', 'GS.TC', 'GS.RL', 'CG.PP', 'CG.PA', 'LA.MS']
+        };
+
+        let currentFilter = { type: 'industry', value: 'all' };
+
+        // Initialize the application
+        function init() {
+            generatePeriodicTable();
+            setupEventListeners();
+            updateStatistics();
+        }
+
+        // Generate the periodic table grid
+        function generatePeriodicTable() {
+            const grid = document.getElementById('periodic-grid');
+            grid.innerHTML = '';
+
+            Object.keys(capabilities).forEach(capId => {
+                const capability = capabilities[capId];
+                const category = capId.split('.')[0];
+                
+                const capElement = document.createElement('div');
+                capElement.className = `capability ${category}`;
+                capElement.setAttribute('data-id', capId);
+                capElement.innerHTML = `
+                    <div class="capability-code">${capId}</div>
+                    <div class="capability-name">${capability.name}</div>
+                `;
+
+                // Add tooltip functionality
+                capElement.addEventListener('mouseenter', (e) => showTooltip(e, capability.description));
+                capElement.addEventListener('mouseleave', hideTooltip);
+                capElement.addEventListener('mousemove', moveTooltip);
+
+                grid.appendChild(capElement);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Industry buttons
+            document.querySelectorAll('.industry-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.industry-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    currentFilter = { type: 'industry', value: e.target.dataset.industry };
+                    filterCapabilities();
+                    resetMaturityButtons();
+                    updateStatistics();
+                });
+            });
+
+            // Maturity buttons
+            document.querySelectorAll('.maturity-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.maturity-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    currentFilter = { type: 'maturity', value: e.target.dataset.level };
+                    filterCapabilities();
+                    resetIndustryButtons();
+                    updateProgressIndicator(e.target.dataset.level);
+                    updateStatistics();
+                });
+            });
+        }
+
+        // Filter capabilities based on current selection
+        function filterCapabilities() {
+            const allCapabilities = document.querySelectorAll('.capability');
+            let activeCapabilities = [];
+
+            if (currentFilter.type === 'industry') {
+                activeCapabilities = industryUseCases[currentFilter.value] || [];
+            } else if (currentFilter.type === 'maturity') {
+                activeCapabilities = maturityLevels[currentFilter.value] || [];
+            }
+
+            allCapabilities.forEach(cap => {
+                const capId = cap.dataset.id;
+                if (activeCapabilities.includes(capId)) {
+                    cap.classList.remove('inactive');
+                    cap.classList.add('active');
+                } else {
+                    cap.classList.remove('active');
+                    cap.classList.add('inactive');
+                }
+            });
+        }
+
+        // Reset maturity buttons
+        function resetMaturityButtons() {
+            document.querySelectorAll('.maturity-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.progress-dot').forEach(dot => dot.classList.remove('active'));
+        }
+
+        // Reset industry buttons
+        function resetIndustryButtons() {
+            document.querySelectorAll('.industry-btn').forEach(btn => btn.classList.remove('active'));
+        }
+
+        // Update progress indicator
+        function updateProgressIndicator(level) {
+            document.querySelectorAll('.progress-dot').forEach(dot => dot.classList.remove('active'));
+            const targetDot = document.querySelector(`.progress-dot[data-level="${level}"]`);
+            if (targetDot) {
+                targetDot.classList.add('active');
+            }
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            let activeCount = 0;
+            let categoriesUsed = new Set();
+
+            if (currentFilter.type === 'industry') {
+                const activeCaps = industryUseCases[currentFilter.value] || [];
+                activeCount = activeCaps.length;
+                activeCaps.forEach(capId => {
+                    categoriesUsed.add(capId.split('.')[0]);
+                });
+            } else if (currentFilter.type === 'maturity') {
+                const activeCaps = maturityLevels[currentFilter.value] || [];
+                activeCount = activeCaps.length;
+                activeCaps.forEach(capId => {
+                    categoriesUsed.add(capId.split('.')[0]);
+                });
+            }
+
+            const totalCapabilities = Object.keys(capabilities).length;
+            const complexityPercent = Math.round((activeCount / totalCapabilities) * 100);
+
+            document.getElementById('active-capabilities').textContent = activeCount;
+            document.getElementById('categories-used').textContent = categoriesUsed.size;
+            document.getElementById('complexity-percent').textContent = `${complexityPercent}%`;
+            
+            if (currentFilter.type === 'maturity') {
+                document.getElementById('maturity-level').textContent = currentFilter.value;
+            } else {
+                document.getElementById('maturity-level').textContent = 'All';
+            }
+        }
+
+        // Tooltip functionality
+        function showTooltip(event, description) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.textContent = description;
+            tooltip.classList.add('visible');
+            moveTooltip(event);
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.classList.remove('visible');
+        }
+
+        function moveTooltip(event) {
+            const tooltip = document.getElementById('tooltip');
+            const rect = tooltip.getBoundingClientRect();
+            
+            let left = event.pageX + 15;
+            let top = event.pageY - rect.height - 10;
+            
+            // Adjust if tooltip would go off screen
+            if (left + rect.width > window.innerWidth) {
+                left = event.pageX - rect.width - 15;
+            }
+            if (top < 0) {
+                top = event.pageY + 15;
+            }
+            
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
