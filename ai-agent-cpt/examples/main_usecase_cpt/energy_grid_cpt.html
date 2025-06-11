@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridHarmony Energy Management - AI Agent CPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e1f5fe 30%, #f0f9ff 70%, #f8fafc 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.98);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            color: #059669;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .header .description {
+            color: #475569;
+            font-size: 1.1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .view-btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            border-color: #10b981;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(8, 120px);
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .capability {
+            border: 3px solid;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .capability:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .capability.hidden {
+            opacity: 0.2;
+            filter: grayscale(80%);
+            transform: scale(0.9);
+        }
+
+        .capability.selected {
+            opacity: 1;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        .capability.essential {
+            border-width: 4px;
+            box-shadow: 0 0 15px rgba(5, 150, 105, 0.4);
+        }
+
+        .capability-code {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .capability-name {
+            font-size: 0.8rem;
+            line-height: 1.1;
+            font-weight: 500;
+        }
+
+        .priority-indicator {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .priority-high { background: #ef4444; }
+        .priority-medium { background: #f97316; }
+        .priority-low { background: #22c55e; }
+
+        /* Category Colors */
+        .pk { background: #D1DCEA; border-color: #7A9BC4; color: #13386D; }
+        .cg { background: #FAEAD5; border-color: #D4A571; color: #945911; }
+        .la { background: #E3DDEC; border-color: #A18DB5; color: #4E3D6F; }
+        .ae { background: #EEEEEE; border-color: #999999; color: #404040; }
+        .ic { background: #D5E3E1; border-color: #7FA596; color: #295548; }
+        .gs { background: #EDD9D5; border-color: #C78275; color: #792D21; }
+
+        /* Grid Positioning */
+        .pos-1-2 { grid-column: 2; grid-row: 1; }
+        .pos-1-3 { grid-column: 3; grid-row: 1; }
+        .pos-1-5 { grid-column: 5; grid-row: 1; }
+        .pos-1-6 { grid-column: 6; grid-row: 1; }
+        .pos-2-2 { grid-column: 2; grid-row: 2; }
+        .pos-2-3 { grid-column: 3; grid-row: 2; }
+        .pos-2-4 { grid-column: 4; grid-row: 2; }
+        .pos-2-5 { grid-column: 5; grid-row: 2; }
+        .pos-2-6 { grid-column: 6; grid-row: 2; }
+        .pos-3-1 { grid-column: 1; grid-row: 3; }
+        .pos-3-2 { grid-column: 2; grid-row: 3; }
+        .pos-3-3 { grid-column: 3; grid-row: 3; }
+        .pos-3-4 { grid-column: 4; grid-row: 3; }
+        .pos-3-5 { grid-column: 5; grid-row: 3; }
+        .pos-3-6 { grid-column: 6; grid-row: 3; }
+        .pos-4-1 { grid-column: 1; grid-row: 4; }
+        .pos-4-2 { grid-column: 2; grid-row: 4; }
+        .pos-4-3 { grid-column: 3; grid-row: 4; }
+        .pos-4-4 { grid-column: 4; grid-row: 4; }
+        .pos-4-5 { grid-column: 5; grid-row: 4; }
+        .pos-4-6 { grid-column: 6; grid-row: 4; }
+        .pos-5-1 { grid-column: 1; grid-row: 5; }
+        .pos-5-2 { grid-column: 2; grid-row: 5; }
+        .pos-5-3 { grid-column: 3; grid-row: 5; }
+        .pos-5-4 { grid-column: 4; grid-row: 5; }
+        .pos-5-5 { grid-column: 5; grid-row: 5; }
+        .pos-5-6 { grid-column: 6; grid-row: 5; }
+        .pos-6-1 { grid-column: 1; grid-row: 6; }
+        .pos-6-2 { grid-column: 2; grid-row: 6; }
+        .pos-6-3 { grid-column: 3; grid-row: 6; }
+        .pos-6-4 { grid-column: 4; grid-row: 6; }
+        .pos-6-5 { grid-column: 5; grid-row: 6; }
+        .pos-6-6 { grid-column: 6; grid-row: 6; }
+        .pos-7-1 { grid-column: 1; grid-row: 7; }
+        .pos-7-2 { grid-column: 2; grid-row: 7; }
+        .pos-7-3 { grid-column: 3; grid-row: 7; }
+        .pos-7-4 { grid-column: 4; grid-row: 7; }
+        .pos-7-5 { grid-column: 5; grid-row: 7; }
+        .pos-7-6 { grid-column: 6; grid-row: 7; }
+        .pos-8-1 { grid-column: 1; grid-row: 8; }
+        .pos-8-2 { grid-column: 2; grid-row: 8; }
+        .pos-8-3 { grid-column: 3; grid-row: 8; }
+        .pos-8-4 { grid-column: 4; grid-row: 8; }
+        .pos-8-5 { grid-column: 5; grid-row: 8; }
+        .pos-8-6 { grid-column: 6; grid-row: 8; }
+
+        .section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection {
+            margin-bottom: 25px;
+        }
+
+        .subsection h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #059669;
+        }
+
+        .subsection p, .subsection li {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .priority-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .priority-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .priority-card {
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .priority-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .priority-card.high { border-left-color: #ef4444; }
+        .priority-card.medium { border-left-color: #f97316; }
+        .priority-card.low { border-left-color: #22c55e; }
+
+        .priority-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .priority-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .priority-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+        }
+
+        .priority-card li:last-child {
+            border-bottom: none;
+        }
+
+        .implementation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .implementation-card {
+            background: #f1f5f9;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #059669;
+        }
+
+        .implementation-card h4 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .legend-item.pk { background: #D1DCEA; border-color: #7A9BC4; }
+        .legend-item.cg { background: #FAEAD5; border-color: #D4A571; }
+        .legend-item.la { background: #E3DDEC; border-color: #A18DB5; }
+        .legend-item.ae { background: #EEEEEE; border-color: #999999; }
+        .legend-item.ic { background: #D5E3E1; border-color: #7FA596; }
+        .legend-item.gs { background: #EDD9D5; border-color: #C78275; }
+
+        .legend-category {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .legend-description {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 25px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+
+        .footer-link {
+            color: #059669;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #047857;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1200px) {
+            .periodic-table {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 25px;
+            }
+            
+            .capability {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            .view-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .priority-cards, .implementation-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚡ GridHarmony Energy Management</h1>
+        <h2>Electric Utility Operations Implementation Guide - AI Agent Capabilities Periodic Table</h2>
+        <p class="description"><strong>Level 4 Multi-Agent Generative Systems</strong> | 23 Essential Capabilities for Real-time Grid Optimization featuring GridGuardian, EconoOptimizer, RenewableHarbor, PredictiveMaintainer, and ComplianceOracle agents achieving 15-25% cost reduction and 30% renewable integration improvement</p>
+    </div>
+
+    <div class="controls">
+        <button class="view-btn active" data-view="all">All Capabilities</button>
+        <button class="view-btn" data-view="gridharmony">GridHarmony MAGS</button>
+        <button class="view-btn" data-view="essential">Essential Only</button>
+        <button class="view-btn" data-view="advanced">Advanced Features</button>
+    </div>
+
+    <div class="container">
+        <div class="periodic-table">
+            <!-- Perception & Knowledge (PK) -->
+            <div class="capability pk pos-3-1 selected essential" data-code="PK.OB" data-priority="high">
+                <div class="capability-code">PK.OB</div>
+                <div class="capability-name">Environmental Sensing</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability pk pos-4-1 selected" data-code="PK.KB" data-priority="medium">
+                <div class="capability-code">PK.KB</div>
+                <div class="capability-name">Knowledge Access</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability pk pos-5-1" data-code="PK.CX" data-priority="low">
+                <div class="capability-code">PK.CX</div>
+                <div class="capability-name">Context & Memory</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability pk pos-6-1 selected" data-code="PK.MF" data-priority="medium">
+                <div class="capability-code">PK.MF</div>
+                <div class="capability-name">Multi-Modal Fusion</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+
+            <!-- Cognition & Reasoning (CG) -->
+            <div class="capability cg pos-1-2 selected" data-code="CG.PL" data-priority="medium">
+                <div class="capability-code">CG.PL</div>
+                <div class="capability-name">Planning & Decomposition</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability cg pos-2-2 selected essential" data-code="CG.RS" data-priority="high">
+                <div class="capability-code">CG.RS</div>
+                <div class="capability-name">Reasoning</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-3-2 selected essential" data-code="CG.DC" data-priority="high">
+                <div class="capability-code">CG.DC</div>
+                <div class="capability-name">Decision Making</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability cg pos-4-2" data-code="CG.PS" data-priority="low">
+                <div class="capability-code">CG.PS</div>
+                <div class="capability-name">Problem Solving</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability cg pos-5-2" data-code="CG.PP" data-priority="low">
+                <div class="capability-code">CG.PP</div>
+                <div class="capability-name">Formal Planning</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability cg pos-6-2" data-code="CG.PA" data-priority="low">
+                <div class="capability-code">CG.PA</div>
+                <div class="capability-name">Plan Adaptation</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+
+            <!-- Learning & Adaptation (LA) -->
+            <div class="capability la pos-1-3 selected" data-code="LA.MM" data-priority="medium">
+                <div class="capability-code">LA.MM</div>
+                <div class="capability-name">Memory Management</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability la pos-2-3" data-code="LA.RL" data-priority="low">
+                <div class="capability-code">LA.RL</div>
+                <div class="capability-name">Reinforcement Learning</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability la pos-3-3" data-code="LA.AD" data-priority="low">
+                <div class="capability-code">LA.AD</div>
+                <div class="capability-name">Self-Optimization</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability la pos-4-3 selected essential" data-code="LA.SL" data-priority="high">
+                <div class="capability-code">LA.SL</div>
+                <div class="capability-name">Supervised Learning</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability la pos-5-3" data-code="LA.VM" data-priority="low">
+                <div class="capability-code">LA.VM</div>
+                <div class="capability-name">Vector Memory</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability la pos-6-3" data-code="LA.MS" data-priority="low">
+                <div class="capability-code">LA.MS</div>
+                <div class="capability-name">Memory Scoring</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+
+            <!-- Action & Execution (AE) -->
+            <div class="capability ae pos-2-4 selected essential" data-code="AE.TX" data-priority="high">
+                <div class="capability-code">AE.TX</div>
+                <div class="capability-name">Task Execution</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ae pos-3-4 selected essential" data-code="AE.TL" data-priority="high">
+                <div class="capability-code">AE.TL</div>
+                <div class="capability-name">Tool Usage & API</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ae pos-4-4" data-code="AE.CG" data-priority="low">
+                <div class="capability-code">AE.CG</div>
+                <div class="capability-name">Code Generation</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ae pos-5-4" data-code="AE.CX" data-priority="low">
+                <div class="capability-code">AE.CX</div>
+                <div class="capability-name">Content Creation</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ae pos-6-4" data-code="AE.TM" data-priority="low">
+                <div class="capability-code">AE.TM</div>
+                <div class="capability-name">Tool Lifecycle</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ae pos-7-4" data-code="AE.MC" data-priority="low">
+                <div class="capability-code">AE.MC</div>
+                <div class="capability-name">MCP Integration</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+
+            <!-- Interaction & Collaboration (IC) -->
+            <div class="capability ic pos-1-5" data-code="IC.NL" data-priority="low">
+                <div class="capability-code">IC.NL</div>
+                <div class="capability-name">Natural Language</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ic pos-2-5" data-code="IC.DM" data-priority="low">
+                <div class="capability-code">IC.DM</div>
+                <div class="capability-name">Dialogue Management</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ic pos-3-5" data-code="IC.HL" data-priority="low">
+                <div class="capability-code">IC.HL</div>
+                <div class="capability-name">Human-in-Loop</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ic pos-4-5 selected essential" data-code="IC.AC" data-priority="high">
+                <div class="capability-code">IC.AC</div>
+                <div class="capability-name">Agent Communication</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-5-5 selected essential" data-code="IC.CL" data-priority="high">
+                <div class="capability-code">IC.CL</div>
+                <div class="capability-name">Collaboration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-6-5" data-code="IC.RB" data-priority="low">
+                <div class="capability-code">IC.RB</div>
+                <div class="capability-name">Role Behavior</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability ic pos-1-6 selected" data-code="IC.CS" data-priority="medium">
+                <div class="capability-code">IC.CS</div>
+                <div class="capability-name">Consensus Protocols</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-2-6 selected" data-code="IC.CF" data-priority="medium">
+                <div class="capability-code">IC.CF</div>
+                <div class="capability-name">Conflict Resolution</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-3-6 selected essential" data-code="IC.SI" data-priority="high">
+                <div class="capability-code">IC.SI</div>
+                <div class="capability-name">Industrial Integration</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability ic pos-4-6 selected" data-code="IC.ES" data-priority="medium">
+                <div class="capability-code">IC.ES</div>
+                <div class="capability-name">Enterprise Integration</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-5-6 selected" data-code="IC.MB" data-priority="medium">
+                <div class="capability-code">IC.MB</div>
+                <div class="capability-name">Message Brokers</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability ic pos-6-6 selected" data-code="IC.DS" data-priority="medium">
+                <div class="capability-code">IC.DS</div>
+                <div class="capability-name">Distributed Coordination</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+
+            <!-- Governance & Safety (GS) -->
+            <div class="capability gs pos-7-1" data-code="GS.DL" data-priority="low">
+                <div class="capability-code">GS.DL</div>
+                <div class="capability-name">Deployment Management</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-7-2 selected essential" data-code="GS.MO" data-priority="high">
+                <div class="capability-code">GS.MO</div>
+                <div class="capability-name">Monitoring</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-7-3" data-code="GS.EV" data-priority="low">
+                <div class="capability-code">GS.EV</div>
+                <div class="capability-name">Evaluation</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-7-5" data-code="GS.ET" data-priority="low">
+                <div class="capability-code">GS.ET</div>
+                <div class="capability-name">Ethics</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-7-6" data-code="GS.PR" data-priority="low">
+                <div class="capability-code">GS.PR</div>
+                <div class="capability-name">Privacy</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-8-1" data-code="GS.SC" data-priority="low">
+                <div class="capability-code">GS.SC</div>
+                <div class="capability-name">Scaling</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+            <div class="capability gs pos-8-2 selected essential" data-code="GS.SF" data-priority="high">
+                <div class="capability-code">GS.SF</div>
+                <div class="capability-name">Safety</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-3 selected essential" data-code="GS.SE" data-priority="high">
+                <div class="capability-code">GS.SE</div>
+                <div class="capability-name">Security</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-4 selected" data-code="GS.EX" data-priority="medium">
+                <div class="capability-code">GS.EX</div>
+                <div class="capability-name">Explainability</div>
+                <div class="priority-indicator priority-medium"></div>
+            </div>
+            <div class="capability gs pos-8-5 selected essential" data-code="GS.RL" data-priority="high">
+                <div class="capability-code">GS.RL</div>
+                <div class="capability-name">Reliability</div>
+                <div class="priority-indicator priority-high"></div>
+            </div>
+            <div class="capability gs pos-8-6" data-code="GS.TC" data-priority="low">
+                <div class="capability-code">GS.TC</div>
+                <div class="capability-name">Trust Management</div>
+                <div class="priority-indicator priority-low"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">🎯 The Electric Grid Challenge</h3>
+            
+            <div class="subsection">
+                <h4>Critical Decision Problem</h4>
+                <p>Grid operators face real-time energy distribution optimization across increasingly complex, bidirectional power networks. The system must simultaneously optimize energy routing from multiple sources (traditional plants, solar, wind, storage), activate demand response programs, and maintain grid stability while maximizing renewable energy utilization. Current manual processes are insufficient for managing this complexity, leading to suboptimal resource allocation, missed renewable integration opportunities, and increased operational costs of $2.1 billion annually across U.S. utilities.</p>
+            </div>
+
+            <div class="subsection">
+                <h4>Multi-Agent Conflicts in GridHarmony MAGS</h4>
+                <p>The GridHarmony Intelligence Network manages inherent conflicts between five specialized agents: <strong>GridGuardian</strong> (safety first - maintains ±0.1 Hz frequency), <strong>EconoOptimizer</strong> (cost minimization - targets $50/MWh savings), <strong>RenewableHarbor</strong> (renewable integration - <5% MAPE forecasting), <strong>PredictiveMaintainer</strong> (equipment reliability - 99.5%+ availability), and <strong>ComplianceOracle</strong> (regulatory adherence - 100% NERC compliance). When renewable generation suddenly drops during peak demand, economic optimization conflicts with safety requirements, requiring sophisticated consensus protocols to balance $500K/hour cost impacts against stability risks.</p>
+            </div>
+
+            <div class="subsection">
+                <h4>Complex Integration Requirements</h4>
+                <p>The system integrates real-time data from SCADA systems (4 samples/second), 50 million+ smart meters (15-minute intervals), weather services (satellite + ground stations), electricity markets (5-minute pricing), renewable generation forecasts (1-hour ahead), equipment IoT sensors (1-minute updates), regulatory databases (weekly updates), and customer information systems. This multi-source data fusion enables predictive analytics across time horizons from milliseconds (stability) to weeks (maintenance scheduling) with total data throughput of 2.5 TB/day.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">🤖 Why Level 4 Multi-Agent Generative Systems?</h3>
+            
+            <div class="subsection">
+                <h4>Specialized Agent Roles</h4>
+                <p><strong>GridGuardian:</strong> Real-time stability monitoring with 2-second emergency response (±0.1 Hz frequency, ±5% voltage control). <strong>EconoOptimizer:</strong> Economic dispatch optimization achieving $200M annual savings through optimal generation scheduling and demand response coordination. <strong>RenewableHarbor:</strong> Renewable forecasting and integration with <5% MAPE accuracy, reducing curtailment from 12% to <5%. <strong>PredictiveMaintainer:</strong> Equipment health monitoring preventing $50M in unplanned outages through predictive analytics. <strong>ComplianceOracle:</strong> Automated regulatory reporting achieving 100% NERC compliance with 90% reduction in manual reporting effort.</p>
+            </div>
+
+            <div class="subsection">
+                <h4>Decision Timeframes</h4>
+                <p>The system operates across multiple time horizons requiring specialized expertise: <strong>Real-time (seconds):</strong> Grid stability responses and emergency load shedding managed by GridGuardian. <strong>Short-term (15 minutes - 24 hours):</strong> Load forecasting and economic dispatch optimization by EconoOptimizer and RenewableHarbor. <strong>Medium-term (days - weeks):</strong> Maintenance scheduling and capacity planning coordinated by PredictiveMaintainer. Each agent specializes in different timeframes while maintaining continuous coordination through IC.AC and IC.CL capabilities.</p>
+            </div>
+
+            <div class="subsection">
+                <h4>Coordination Requirements</h4>
+                <p>Level 4 sophistication is essential because single-agent systems cannot manage the complexity of balancing competing objectives (safety vs. cost vs. environmental impact) while maintaining sub-second responsiveness. The distributed intelligence enables autonomous operation achieving target improvements: 15-25% cost reduction ($300M-500M annually), 30% renewable integration increase (from 25% to 32.5%), 80% faster emergency response (from 10 seconds to 2 seconds), while maintaining 99.9%+ grid reliability and 100% regulatory compliance.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">🎯 Implementation Guidance for GridHarmony MAGS</h3>
+            
+            <div class="implementation-cards">
+                <div class="implementation-card">
+                    <h4>🚨 Critical Safety & Compliance Systems</h4>
+                    <p><strong>GS.SF:</strong> Maintains grid frequency within ±0.1 Hz and voltage within ±5% preventing $2B in potential blackout costs. <strong>GS.SE:</strong> Protects critical infrastructure through cybersecurity protocols including encrypted SCADA communications and intrusion detection. <strong>GS.RL:</strong> Ensures 99.9%+ system availability through redundant systems and fault tolerance. <strong>GS.MO:</strong> Real-time monitoring of 2,500+ grid parameters with automated alerting and reporting.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <h4>🤖 Level 4 Multi-Agent Architecture</h4>
+                    <p><strong>IC.AC:</strong> Enables millisecond communication between 5 specialized agents using high-speed message passing protocols. <strong>IC.CL:</strong> Facilitates collaborative decision-making through consensus algorithms handling 1,000+ decisions per hour. <strong>IC.CS:</strong> Manages formal consensus protocols resolving conflicts between safety (GridGuardian), economics (EconoOptimizer), and environment (RenewableHarbor) objectives. <strong>IC.CF:</strong> Automated conflict resolution preventing $100K/hour losses from suboptimal decisions.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <h4>📊 Data Integration & System Connectivity</h4>
+                    <p><strong>PK.OB:</strong> Integrates 15,000+ SCADA sensors, 50M smart meters, and 2,000+ renewable generation points for comprehensive grid awareness. <strong>IC.SI:</strong> Connects with industrial control systems using DNP3, IEC 61850, and Modbus protocols. <strong>IC.ES:</strong> Integrates with 12 utility management systems including ERP, CRM, and asset management. <strong>IC.MB:</strong> Real-time data streaming processing 2.5 TB/day with <100ms latency through Apache Kafka infrastructure.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <h4>🧠 Intelligent Decision Making</h4>
+                    <p><strong>CG.DC:</strong> Makes 10,000+ autonomous decisions daily balancing grid stability, economic efficiency ($200M annual optimization), and renewable integration (30% increase). <strong>CG.RS:</strong> Complex multi-criteria reasoning evaluating 500+ variables simultaneously for optimal dispatch decisions. <strong>LA.SL:</strong> Predictive analytics achieving <5% MAPE for load forecasting, <3% for renewable prediction, and 85% accuracy for equipment failure prediction 30 days ahead.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <h4>⚡ System Control & Execution</h4>
+                    <p><strong>AE.TX:</strong> Implements 5,000+ daily control actions including generation dispatch, demand response activation (300MW capacity), and equipment switching with 99.8% success rate. <strong>AE.TL:</strong> Integrates with 25+ external systems including electricity markets (ISO/RTO), weather services (NOAA), and equipment vendors through standardized APIs. Executes optimization decisions within 15-second implementation windows.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <h4>📈 Measurable Business Impact</h4>
+                    <p><strong>Target ROI:</strong> $300M-500M annual savings through 15-25% operational cost reduction. <strong>Renewable Integration:</strong> 30% increase from 25% to 32.5% grid penetration, avoiding 2.1M tons CO2 annually. <strong>Reliability Improvement:</strong> 80% faster emergency response reducing outage costs by $150M/year. <strong>Operational Excellence:</strong> 99% regulatory compliance automation, 85% reduction in manual reporting, <5% renewable curtailment vs. industry 12% average.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="priority-section">
+            <h3 class="section-title">📊 Implementation Priority Guide</h3>
+            
+            <div class="priority-cards">
+                <div class="priority-card high">
+                    <h4>🔴 High Priority (Critical Foundation)</h4>
+                    <p><strong>Phase 1 Implementation (Months 1-6):</strong> Essential for basic system functionality, safety, and regulatory compliance. High risk if not implemented - system cannot operate safely.</p>
+                    <ul>
+                        <li><strong>PK.OB:</strong> Real-time SCADA and sensor integration (15,000+ sensors)</li>
+                        <li><strong>CG.DC & CG.RS:</strong> Core decision-making and multi-criteria reasoning</li>
+                        <li><strong>IC.AC & IC.CL:</strong> Multi-agent communication and collaboration</li>
+                        <li><strong>IC.SI:</strong> Industrial SCADA system integration</li>
+                        <li><strong>LA.SL:</strong> Predictive analytics for load/renewable forecasting</li>
+                        <li><strong>AE.TX & AE.TL:</strong> System control and API integration</li>
+                        <li><strong>GS.SF, GS.SE, GS.RL, GS.MO:</strong> Safety, security, reliability, monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="priority-card medium">
+                    <h4>🟠 Medium Priority (Performance Enhancement)</h4>
+                    <p><strong>Phase 2 Implementation (Months 7-18):</strong> Significantly enhances optimization performance and operational excellence. Medium risk if missing - reduces system effectiveness and ROI.</p>
+                    <ul>
+                        <li><strong>PK.KB & PK.MF:</strong> Enhanced knowledge access and multi-modal data fusion</li>
+                        <li><strong>CG.PL:</strong> Advanced planning across multiple time horizons</li>
+                        <li><strong>IC.CS & IC.CF:</strong> Consensus protocols and conflict resolution</li>
+                        <li><strong>IC.ES, IC.MB, IC.DS:</strong> Enterprise integration and distributed coordination</li>
+                        <li><strong>LA.MM:</strong> Advanced memory management for pattern recognition</li>
+                        <li><strong>GS.EX:</strong> Decision explainability for operator confidence</li>
+                    </ul>
+                </div>
+
+                <div class="priority-card low">
+                    <h4>🟢 Low Priority (Future Enhancement)</h4>
+                    <p><strong>Phase 3+ Implementation (Months 19+):</strong> Advanced capabilities for future sophistication and learning. Low risk if deferred - enhancement opportunities without operational impact.</p>
+                    <ul>
+                        <li><strong>Additional Learning Capabilities:</strong> LA.RL, LA.AD, LA.VM, LA.MS</li>
+                        <li><strong>Advanced Execution:</strong> AE.CG, AE.CX, AE.TM, AE.MC</li>
+                        <li><strong>Enhanced Interaction:</strong> IC.NL, IC.DM, IC.HL, IC.RB</li>
+                        <li><strong>Extended Governance:</strong> GS.DL, GS.EV, GS.ET, GS.PR, GS.SC, GS.TC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">📋 Capability Categories for Smart Grid Operations</h3>
+            
+            <div class="legend-grid">
+                <div class="legend-item pk">
+                    <div>
+                        <div class="legend-category" style="color: #13386D;">PK - Perception & Knowledge</div>
+                        <div class="legend-description" style="color: #13386D;">Real-time SCADA sensor integration (15,000+ points), smart meter data processing (50M meters), weather and market data fusion, multi-modal information synthesis for comprehensive grid state awareness and informed decision making across all agents.</div>
+                    </div>
+                </div>
+                <div class="legend-item cg">
+                    <div>
+                        <div class="legend-category" style="color: #945911;">CG - Cognition & Reasoning</div>
+                        <div class="legend-description" style="color: #945911;">Multi-criteria decision making balancing safety (±0.1 Hz), economics ($200M optimization), and environmental goals (30% renewable integration). Complex reasoning across multiple time horizons for grid stability and optimization with 10,000+ daily decisions.</div>
+                    </div>
+                </div>
+                <div class="legend-item la">
+                    <div>
+                        <div class="legend-category" style="color: #4E3D6F;">LA - Learning & Adaptation</div>
+                        <div class="legend-description" style="color: #4E3D6F;">Predictive analytics for load forecasting (<5% MAPE), renewable generation prediction (<3% error), and equipment maintenance (85% failure prediction accuracy 30 days ahead) with continuous improvement and pattern recognition.</div>
+                    </div>
+                </div>
+                <div class="legend-item ae">
+                    <div>
+                        <div class="legend-category" style="color: #404040;">AE - Action & Execution</div>
+                        <div class="legend-description" style="color: #404040;">Grid control implementation (5,000+ daily actions), generation dispatch, demand response execution (300MW capacity), and integration with 25+ external systems including electricity markets, weather services, and equipment vendors.</div>
+                    </div>
+                </div>
+                <div class="legend-item ic">
+                    <div>
+                        <div class="legend-category" style="color: #295548;">IC - Interaction & Collaboration</div>
+                        <div class="legend-description" style="color: #295548;">Multi-agent coordination between 5 specialized agents, consensus building for conflicting objectives, industrial protocol integration (DNP3, IEC 61850), enterprise system connectivity, and distributed intelligence coordination with millisecond response times.</div>
+                    </div>
+                </div>
+                <div class="legend-item gs">
+                    <div>
+                        <div class="legend-category" style="color: #792D21;">GS - Governance & Safety</div>
+                        <div class="legend-description" style="color: #792D21;">Grid safety management (±0.1 Hz frequency control), cybersecurity protection for critical infrastructure, 100% regulatory compliance automation, reliability assurance (99.9%+ uptime), and comprehensive monitoring of 2,500+ grid parameters.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by <a href="https://www.digitaltwinconsortium.org" target="_blank" class="footer-link">Digital Twin Consortium</a> - AI Agent Capabilities Framework</p>
+        </div>
+    </div>
+
+    <!-- Modal for capability details -->
+    <div id="capabilityModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Capability sets for different views
+        const capabilitySets = {
+            all: ['all'],
+            gridharmony: [
+                'PK.OB', 'PK.KB', 'PK.MF', 'CG.PL', 'CG.RS', 'CG.DC', 'LA.SL', 'LA.MM',
+                'AE.TX', 'AE.TL', 'IC.AC', 'IC.CL', 'IC.CS', 'IC.CF', 'IC.SI', 'IC.ES', 
+                'IC.MB', 'IC.DS', 'GS.MO', 'GS.SF', 'GS.SE', 'GS.EX', 'GS.RL'
+            ],
+            essential: [
+                'PK.OB', 'CG.RS', 'CG.DC', 'IC.AC', 'IC.CL', 'IC.SI', 'LA.SL',
+                'AE.TX', 'AE.TL', 'GS.SF', 'GS.SE', 'GS.RL', 'GS.MO'
+            ],
+            advanced: [
+                'PK.KB', 'PK.MF', 'CG.PL', 'IC.CS', 'IC.CF', 'IC.ES', 'IC.MB', 
+                'IC.DS', 'LA.MM', 'GS.EX'
+            ]
+        };
+
+        // Capability descriptions
+        const capabilityDescriptions = {
+            'PK.OB': 'Integrates 15,000+ real-time SCADA sensors, 50M smart meters, and renewable generation points for comprehensive grid state awareness. Processes 2.5 TB/day of sensor data with <100ms latency for real-time decision making across all GridHarmony agents.',
+            'PK.KB': 'Accesses regulatory databases (NERC standards), equipment manuals (2,000+ generators), historical operational data (5 years), and electricity market information to enhance decision quality and ensure compliance across all operational scenarios.',
+            'PK.MF': 'Fuses multi-modal data from weather services (satellite + ground), electricity markets (5-min pricing), equipment IoT sensors (15,000+ points), and grid measurements for comprehensive situational awareness enabling 30% renewable integration improvement.',
+            'CG.RS': 'Applies complex multi-criteria reasoning across 500+ variables to balance competing objectives: grid stability (±0.1 Hz), economic efficiency ($200M annual optimization), and renewable integration (25% to 32.5% target) with microsecond decision response.',
+            'CG.DC': 'Makes 10,000+ autonomous decisions daily for generation dispatch, demand response activation (300MW capacity), and emergency grid operations while maintaining safety constraints and achieving $300M-500M annual cost optimization.',
+            'CG.PL': 'Develops sophisticated multi-temporal planning from real-time (seconds) to weekly optimization horizons, coordinating maintenance schedules worth $150M annually while optimizing renewable integration and grid stability.',
+            'IC.AC': 'Enables millisecond communication between 5 specialized GridHarmony agents (GridGuardian, EconoOptimizer, RenewableHarbor, PredictiveMaintainer, ComplianceOracle) using high-speed message passing protocols for coordinated autonomous operation.',
+            'IC.CL': 'Facilitates collaborative decision-making through consensus algorithms handling 1,000+ decisions per hour, resolving conflicts between safety, economic, and environmental objectives with automated negotiation protocols.',
+            'IC.SI': 'Integrates with industrial SCADA systems using DNP3, IEC 61850, and Modbus protocols, controlling 2,000+ generators and 15,000+ grid devices with 99.8% command success rate and 2-second emergency response capability.',
+            'LA.SL': 'Provides predictive analytics achieving <5% MAPE for load forecasting, <3% error for renewable generation prediction, and 85% accuracy for equipment failure prediction 30 days ahead, enabling $50M savings in preventive maintenance.',
+            'AE.TX': 'Executes 5,000+ daily control actions including generation dispatch, demand response programs, and equipment switching with 99.8% success rate, implementing optimization decisions within 15-second windows for real-time grid management.',
+            'AE.TL': 'Integrates with 25+ external systems including electricity markets (ISO/RTO), weather services (NOAA), equipment vendors, and utility management platforms through standardized APIs, processing 50,000+ transactions daily.',
+            'GS.SF': 'Maintains critical grid safety parameters: frequency within ±0.1 Hz (preventing $2B blackout costs), voltage within ±5%, and thermal limits, with automated emergency response preventing cascading failures and ensuring public safety.',
+            'GS.SE': 'Protects critical infrastructure through advanced cybersecurity including encrypted SCADA communications, intrusion detection systems, and air-gapped networks, preventing potential $6B in cyber attack damages to grid infrastructure.',
+            'GS.RL': 'Ensures 99.9%+ system availability through redundant systems, fault tolerance mechanisms, and automated failover, reducing outage costs by $150M/year while maintaining continuous energy supply for 50M+ customers.',
+            'GS.MO': 'Provides real-time monitoring of 2,500+ grid parameters with automated alerting, performance dashboards, and predictive health assessments, enabling 80% faster emergency response and 90% reduction in manual oversight tasks.'
+        };
+
+        // Initialize view
+        function updateView(selectedView) {
+            const capabilities = document.querySelectorAll('.capability');
+            const activeSet = capabilitySets[selectedView];
+            
+            capabilities.forEach(cap => {
+                const code = cap.dataset.code;
+                if (selectedView === 'all' || activeSet.includes(code)) {
+                    cap.classList.remove('hidden');
+                    cap.classList.add('selected');
+                } else {
+                    cap.classList.add('hidden');
+                    cap.classList.remove('selected');
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-view="${selectedView}"]`).classList.add('active');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const view = e.target.dataset.view;
+                updateView(view);
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('capabilityModal');
+        const span = document.getElementsByClassName('close')[0];
+
+        // Capability click events
+        document.querySelectorAll('.capability').forEach(cap => {
+            cap.addEventListener('click', () => {
+                const code = cap.dataset.code;
+                const priority = cap.dataset.priority;
+                const name = cap.querySelector('.capability-name').textContent;
+                
+                document.getElementById('modalTitle').textContent = `${code}: ${name}`;
+                document.getElementById('modalContent').innerHTML = `
+                    <p><strong>Priority:</strong> ${priority.charAt(0).toUpperCase() + priority.slice(1)}</p>
+                    <p><strong>GridHarmony Role:</strong> ${getAgentRole(code)}</p>
+                    <p><strong>Business Impact:</strong> ${capabilityDescriptions[code] || 'Critical capability for GridHarmony multi-agent energy management operations.'}</p>
+                `;
+                modal.style.display = 'block';
+            });
+        });
+
+        function getAgentRole(code) {
+            if (['PK.OB', 'GS.SF', 'GS.RL'].includes(code)) return 'GridGuardian - Real-time safety and stability management';
+            if (['CG.DC', 'AE.TX', 'CG.PL'].includes(code)) return 'EconoOptimizer - Economic dispatch and cost optimization';
+            if (['LA.SL', 'PK.MF', 'PK.KB'].includes(code)) return 'RenewableHarbor - Renewable forecasting and integration';
+            if (['GS.MO', 'LA.MM'].includes(code)) return 'PredictiveMaintainer - Equipment health and maintenance optimization';
+            if (['GS.SE', 'GS.EX'].includes(code)) return 'ComplianceOracle - Regulatory compliance and security';
+            if (['IC.AC', 'IC.CL', 'IC.CS', 'IC.CF'].includes(code)) return 'Multi-Agent Coordination - All agents collaborative intelligence';
+            return 'GridHarmony Multi-Agent System - Distributed intelligence coordination';
+        }
+
+        // Close modal
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize with GridHarmony view
+        updateView('gridharmony');
+    </script>
+</body>
+</html>
